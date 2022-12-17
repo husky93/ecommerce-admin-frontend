@@ -7,20 +7,25 @@ const Login: React.FC<LoginProps> = ({}) => {
   return (
     <main className={styles.main}>
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="username">E-Mail:</label>
-        <input
-          id="username"
-          name="username"
-          type="email"
-          placeholder="example@website.com"
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="example@website.com"
-        />
+        <div className="input_group">
+          <label htmlFor="username">E-Mail:</label>
+          <input
+            id="username"
+            name="username"
+            type="email"
+            placeholder="example@website.com"
+          />
+        </div>
+        <div className="input_group">
+          <label htmlFor="password">Password:</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="example@website.com"
+          />
+        </div>
+        <button type="submit">Login</button>
       </form>
     </main>
   );
