@@ -13,3 +13,8 @@ export interface UserPost {
   };
   token: string;
 }
+
+export interface LoginInput {
+  username: string;
+  password: string;
+}
