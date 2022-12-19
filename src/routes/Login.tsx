@@ -10,6 +10,7 @@ import { loginUser } from '../app/api/api';
 import { useStateContext } from '../context';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Spinner from '../components/Spinner';
 import FormInput from '../components/FormInput';
 
 interface LoginProps {}
@@ -97,7 +98,7 @@ const Login: React.FC<LoginProps> = ({}) => {
               placeholder="*********"
             />
           </div>
-          <button type="submit">Login</button>
+          {isLoading ? <Spinner /> : <button type="submit">Login</button>}
         </form>
       </FormProvider>
     </main>
