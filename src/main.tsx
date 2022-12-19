@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import RouteSwitch from './routes/RouteSwitch';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { StateContextProvider } from './context';
+import 'normalize.css';
 import './assets/styles/globals.css';
 
 import { ReactQueryDevtools } from 'react-query/devtools';
