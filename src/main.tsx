@@ -10,8 +10,10 @@ import {
   Route,
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { StateContextProvider } from './context';
 import './assets/styles/globals.css';
+
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,9 +32,11 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <StateContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </StateContextProvider>
   </React.StrictMode>
 );
