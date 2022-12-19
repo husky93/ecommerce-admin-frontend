@@ -28,7 +28,8 @@ export type LoginInput = TypeOf<typeof loginSchema>;
 const Login: React.FC<LoginProps> = ({}) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = ((location.state as any)?.from.pathname as string) || '/';
+  const from =
+    ((location.state as any)?.from.pathname as string) || '/dashboard';
 
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
@@ -72,7 +73,6 @@ const Login: React.FC<LoginProps> = ({}) => {
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<LoginInput> = (values) => {
-    console.log('yo');
     loginUserFn(values);
   };
 
