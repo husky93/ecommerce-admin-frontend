@@ -7,7 +7,7 @@ interface MenuLinkProps {
   to: string;
 }
 
-export const MenuLink: React.FC<MenuLinkProps> = ({ children, to }) => {
+const MenuLink: React.FC<MenuLinkProps> = ({ children, to }) => {
   return (
     <li className={styles.item}>
       <Link to={to} className={styles.link}>
@@ -16,3 +16,5 @@ export const MenuLink: React.FC<MenuLinkProps> = ({ children, to }) => {
     </li>
   );
 };
+
+export default MenuLink;
