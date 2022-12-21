@@ -4,6 +4,7 @@ import type {
   LoginInput,
   CategoriesGet,
   Category,
+  CategoryInput,
   Item,
   ItemsGet,
   Transaction,
@@ -48,6 +49,11 @@ export const getCategory = async (id: string | undefined) => {
     const response = await authApi.get<Category>(`categories/${id}`);
     return response.data;
   }
+};
+
+export const postCategory = async (category: CategoryInput) => {
+  const response = await authApi.post<Category>('category', category);
+  return response.data;
 };
 
 export const getItems = async () => {

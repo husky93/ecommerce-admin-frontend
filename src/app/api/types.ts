@@ -38,6 +38,11 @@ export interface Category {
   __v: number;
 }
 
+export interface CategoryInput {
+  title: string;
+  description: string;
+}
+
 export interface Item {
   _id: string;
   title: string;
