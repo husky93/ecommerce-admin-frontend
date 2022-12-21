@@ -5,9 +5,15 @@ import styles from '../assets/styles/components/FormInput.module.css';
 type IFormInputProps = {
   name: string;
   label: string;
+  type: string;
 };
 
-const FormInput: FC<IFormInputProps> = ({ name, label, ...otherProps }) => {
+const FormInput: FC<IFormInputProps> = ({
+  name,
+  label,
+  type,
+  ...otherProps
+}) => {
   const {
     control,
     formState: { errors },
@@ -22,7 +28,7 @@ const FormInput: FC<IFormInputProps> = ({ name, label, ...otherProps }) => {
         <div>
           <label>
             {label}
-            <input {...field} {...otherProps} />
+            <input type={type} {...field} {...otherProps} />
           </label>
           <div className={styles.error}>
             {errors[name] && errors[name].message}
