@@ -5,13 +5,15 @@ import styles from '../assets/styles/components/FormInput.module.css';
 type IFormInputProps = {
   name: string;
   label: string;
-  type: string;
+  type?: string;
+  textarea?: boolean;
 };
 
 const FormInput: FC<IFormInputProps> = ({
   name,
   label,
   type,
+  textarea,
   ...otherProps
 }) => {
   const {
@@ -28,7 +30,11 @@ const FormInput: FC<IFormInputProps> = ({
         <div>
           <label>
             {label}
-            <input type={type} {...field} {...otherProps} />
+            {textarea ? (
+              <textarea {...field} {...otherProps} />
+            ) : (
+              <input type={type} {...field} {...otherProps} />
+            )}
           </label>
           <div className={styles.error}>
             {errors[name] && errors[name].message}
