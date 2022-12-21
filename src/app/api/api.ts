@@ -1,5 +1,12 @@
 import axios from 'axios';
-import type { UserPost, LoginInput, CategoriesGet, Category } from './types';
+import type {
+  UserPost,
+  LoginInput,
+  CategoriesGet,
+  Category,
+  Item,
+  ItemsGet,
+} from './types';
 const BASE_URL = 'https://express-shop-api-production.up.railway.app/';
 
 const authApi = axios.create({
@@ -37,6 +44,18 @@ export const getCategories = async () => {
 export const getCategory = async (id: string | undefined) => {
   if (id) {
     const response = await authApi.get<Category>(`categories/${id}`);
+    return response.data;
+  }
+};
+
+export const getItems = async () => {
+  const response = await authApi.get<ItemsGet>('items');
+  return response.data;
+};
+
+export const getItem = async (id: string | undefined) => {
+  if (id) {
+    const response = await authApi.get<Item>(`items/${id}`);
     return response.data;
   }
 };
