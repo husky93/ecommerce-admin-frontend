@@ -10,6 +10,7 @@ import Category from './Category';
 import Items from './Items';
 import Item from './Item';
 import Transactions from './Transactions';
+import Transaction from './Transaction';
 import { useStateContext } from '../context';
 
 interface RouteSwitchProps {}
@@ -39,6 +40,7 @@ const RouteSwitch: React.FC<RouteSwitchProps> = ({}) => {
             <Route path="items" element={<Items />} />
             <Route path="items/:id" element={<Item />} />
             <Route path="transactions" element={<Transactions />} />
+            <Route path="transactions/:id" element={<Transaction />} />
           </Route>
         </Route>
       </Routes>
