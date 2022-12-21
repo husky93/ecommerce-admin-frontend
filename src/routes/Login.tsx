@@ -1,4 +1,4 @@
-import styles from '../assets/styles/login/Login.module.css';
+import styles from '../assets/styles/routes/Login.module.css';
 import { useMutation } from 'react-query';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
