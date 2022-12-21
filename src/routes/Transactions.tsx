@@ -8,14 +8,14 @@ import { useStateContext } from '../context';
 
 const Transactions: React.FC = ({}) => {
   const { state } = useStateContext();
-
   const { isLoading, isError, data, error } = useQuery('transactions', () =>
     getTransactions(state.authUser?.token)
   );
+
   return (
     <div>
       {isLoading && <Spinner />}
-      {isError && <span>Error: {error.message}</span>}
+      {isError && <span>Error: {(error as any).message}</span>}
       {data && (
         <div>
           {data.map((transaction) => (

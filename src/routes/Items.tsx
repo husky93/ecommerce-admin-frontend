@@ -11,7 +11,7 @@ const Items: React.FC = ({}) => {
   return (
     <div className={styles.items}>
       {isLoading && <Spinner />}
-      {isError && <span>Error: {error.message}</span>}
+      {isError && <span>Error: {(error as any).message}</span>}
       {data && (
         <div>
           {data.map((item) => (
