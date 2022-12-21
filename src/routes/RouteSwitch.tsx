@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import ErrorPage from './Error';
+import Home from './Home';
 import Categories from './Categories';
 import Items from './Items';
 import Transactions from './Transactions';
@@ -30,6 +31,7 @@ const RouteSwitch: React.FC<RouteSwitchProps> = ({}) => {
             element={<Dashboard />}
             errorElement={<ErrorPage />}
           >
+            <Route index element={<Home />} />
             <Route path="categories" element={<Categories />} />
             <Route path="items" element={<Items />} />
             <Route path="transactions" element={<Transactions />} />
