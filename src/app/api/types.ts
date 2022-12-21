@@ -64,3 +64,5 @@ export interface Transaction {
 export type CategoriesGet = Array<Category>;
 
 export type ItemsGet = Array<Item>;
+
+export type TransactionsGet = Array<Transaction>;

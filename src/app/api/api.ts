@@ -6,6 +6,8 @@ import type {
   Category,
   Item,
   ItemsGet,
+  Transaction,
+  TransactionsGet,
 } from './types';
 const BASE_URL = 'https://express-shop-api-production.up.railway.app/';
 
@@ -56,6 +58,27 @@ export const getItems = async () => {
 export const getItem = async (id: string | undefined) => {
   if (id) {
     const response = await authApi.get<Item>(`items/${id}`);
+    return response.data;
+  }
+};
+
+export const getTransactions = async (token: string | undefined) => {
+  if (token) {
+    const response = await authApi.get<TransactionsGet>('transactions', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  }
+};
+
+export const getTransaction = async (
+  id: string | undefined,
+  token: string | undefined
+) => {
+  if (id && token) {
+    const response = await authApi.get<Transaction>(`transactions/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   }
 };
