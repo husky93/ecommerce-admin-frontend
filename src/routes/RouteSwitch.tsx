@@ -6,6 +6,7 @@ import Dashboard from './Dashboard';
 import ErrorPage from './Error';
 import Home from './Home';
 import Categories from './Categories';
+import Category from './Category';
 import Items from './Items';
 import Transactions from './Transactions';
 import { useStateContext } from '../context';
@@ -33,6 +34,7 @@ const RouteSwitch: React.FC<RouteSwitchProps> = ({}) => {
           >
             <Route index element={<Home />} />
             <Route path="categories" element={<Categories />} />
+            <Route path="categories/:id" element={<Category />} />
             <Route path="items" element={<Items />} />
             <Route path="transactions" element={<Transactions />} />
           </Route>
