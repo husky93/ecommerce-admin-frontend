@@ -18,3 +18,12 @@ export interface LoginInput {
   username: string;
   password: string;
 }
+
+export interface Category {
+  _id: string;
+  title: string;
+  description: string;
+  __v: number;
+}
+
+export type CategoriesGet = Array<Category>;

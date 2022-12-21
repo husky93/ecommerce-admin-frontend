@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { UserPost, LoginInput } from './types';
+import type { UserPost, LoginInput, CategoriesGet } from './types';
 const BASE_URL = 'https://express-shop-api-production.up.railway.app/';
 
 const authApi = axios.create({
@@ -26,5 +26,11 @@ authApi.interceptors.response.use(
 
 export const loginUser = async (user: LoginInput) => {
   const response = await authApi.post<UserPost>('auth/login', user);
+  return response.data;
+};
+
+export const getCategories = async () => {
+  const response = await authApi.get<CategoriesGet>('categories');
+  console.log(response.data);
   return response.data;
 };
