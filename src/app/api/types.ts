@@ -14,6 +14,18 @@ export interface UserPost {
   token: string;
 }
 
+export interface User {
+  address: {
+    city: string;
+    zip_code: string;
+    street: string;
+    house_num: string;
+  };
+  _id: string;
+  username: string;
+  __v: number;
+}
+
 export interface LoginInput {
   username: string;
   password: string;
@@ -33,6 +45,19 @@ export interface Item {
   category: Category;
   price: number;
   num_in_stock: number;
+  __v: number;
+}
+
+export interface TransactionItem {
+  item: Item;
+  quantity: number;
+}
+
+export interface Transaction {
+  _id: string;
+  user: User;
+  items: Array<TransactionItem>;
+  status: 'pending' | 'delivered' | 'payment failed' | 'cancelled' | 'paid';
   __v: number;
 }
 
