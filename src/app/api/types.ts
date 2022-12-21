@@ -26,4 +26,16 @@ export interface Category {
   __v: number;
 }
 
+export interface Item {
+  _id: string;
+  title: string;
+  description: string;
+  category: Category;
+  price: number;
+  num_in_stock: number;
+  __v: number;
+}
+
 export type CategoriesGet = Array<Category>;
+
+export type ItemsGet = Array<Item>;
