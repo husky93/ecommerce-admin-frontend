@@ -1,10 +1,12 @@
 import React from 'react';
 import ProtectedRoutes from './ProtectedRoutes';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Root from './Root';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import ErrorPage from './Error';
+import Categories from './Categories';
+import Items from './Items';
+import Transactions from './Transactions';
 import { useStateContext } from '../context';
 
 interface RouteSwitchProps {}
@@ -27,7 +29,11 @@ const RouteSwitch: React.FC<RouteSwitchProps> = ({}) => {
             path="/dashboard"
             element={<Dashboard />}
             errorElement={<ErrorPage />}
-          ></Route>
+          >
+            <Route path="categories" element={<Categories />} />
+            <Route path="items" element={<Items />} />
+            <Route path="transactions" element={<Transactions />} />
+          </Route>
         </Route>
       </Routes>
     </Router>
