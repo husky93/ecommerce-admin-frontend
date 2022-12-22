@@ -65,8 +65,8 @@ export const postCategory = async (
 
 export const putCategory = async (
   updatedCategory: CategoryInput,
-  token: string | undefined,
-  id: string | undefined
+  id: string | undefined,
+  token: string | undefined
 ) => {
   if (id && token) {
     const response = await authApi.put<Category>(
@@ -76,6 +76,18 @@ export const putCategory = async (
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    return response.data;
+  }
+};
+
+export const deleteCategory = async (
+  id: string | undefined,
+  token: string | undefined
+) => {
+  if (id && token) {
+    const response = await authApi.delete<Category>(`categories/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   }
 };
