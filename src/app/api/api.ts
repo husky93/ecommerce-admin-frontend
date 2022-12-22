@@ -104,6 +104,18 @@ export const getItem = async (id: string | undefined) => {
   }
 };
 
+export const deleteItem = async (
+  token: string | undefined,
+  id: string | undefined
+) => {
+  if (id && token) {
+    const response = await authApi.delete<Item>(`items/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  }
+};
+
 export const getTransactions = async (token: string | undefined) => {
   if (token) {
     const response = await authApi.get<TransactionsGet>('transactions', {
