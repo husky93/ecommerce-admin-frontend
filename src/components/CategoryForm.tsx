@@ -6,10 +6,10 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useStateContext } from '../context';
-import { useMutation } from 'react-query';
-import { postCategory } from '../app/api/api';
+import { useMutation, useQueryClient } from 'react-query';
+import { postCategory, putCategory, getCategories } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
 import type { Category } from '../app/api/types';
 
@@ -27,10 +27,11 @@ const categorySchema = object({
 
 export type CategoryInput = TypeOf<typeof categorySchema>;
 
-const CategoryForm: React.FC<CategoryFormProps> = ({}) => {
+const CategoryForm: React.FC<CategoryFormProps> = ({ mode }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const stateContext = useStateContext();
+  const { state } = useStateContext();
+  const { id } = useParams();
 
   const from =
     ((location.state as any)?.from.pathname as string) ||
@@ -40,10 +41,17 @@ const CategoryForm: React.FC<CategoryFormProps> = ({}) => {
     resolver: zodResolver(categorySchema),
   });
 
+  const queryClient = useQueryClient();
+
   const { mutate: postCategoryFn, isLoading } = useMutation(
-    (categoryData: CategoryInput) => postCategory(categoryData),
+    (categoryData: CategoryInput) => {
+      if (mode === 'create')
+        return postCategory(categoryData, state.authUser?.token);
+      else return putCategory(categoryData, state.authUser?.token, id);
+    },
     {
       onSuccess: () => {
+        queryClient.invalidateQueries('categories');
         navigate(from);
       },
       onError: (error: any) => {
