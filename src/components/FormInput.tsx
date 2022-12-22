@@ -7,6 +7,7 @@ type IFormInputProps = {
   label: string;
   type?: string;
   textarea?: boolean;
+  [x: string]: any;
 };
 
 const FormInput: FC<IFormInputProps> = ({
