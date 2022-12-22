@@ -5,12 +5,12 @@ import styles from '../assets/styles/components/CategoryForm.module.css';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useStateContext } from '../context';
 import { useMutation, useQueryClient } from 'react-query';
 import { postCategory, putCategory, getCategories } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
+import { handleMutationError } from '../app/modules';
 import type { Category } from '../app/api/types';
 
 interface CategoryFormProps {
@@ -58,19 +58,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
         queryClient.invalidateQueries('categories');
         navigate(from);
       },
-      onError: (error: any) => {
-        if (Array.isArray((error as any).response.data.error)) {
-          (error as any).response.data.error.forEach((el: any) =>
-            toast.error(el.message, {
-              position: 'top-right',
-            })
-          );
-        } else {
-          toast.error((error as any).response.data.message, {
-            position: 'top-right',
-          });
-        }
-      },
+      onError: handleMutationError,
     }
   );
 

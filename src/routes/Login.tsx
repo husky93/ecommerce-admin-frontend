@@ -5,13 +5,13 @@ import { object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { loginUser } from '../app/api/api';
 import { useStateContext } from '../context';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Spinner from '../components/Spinner';
 import FormInput from '../components/FormInput';
+import { handleMutationError } from '../app/modules';
 
 interface LoginProps {}
 
@@ -45,19 +45,7 @@ const Login: React.FC<LoginProps> = ({}) => {
         stateContext.dispatch({ type: 'SET_USER', payload: data });
         navigate(from);
       },
-      onError: (error: any) => {
-        if (Array.isArray((error as any).response.data.error)) {
-          (error as any).response.data.error.forEach((el: any) =>
-            toast.error(el.message, {
-              position: 'top-right',
-            })
-          );
-        } else {
-          toast.error((error as any).response.data.message, {
-            position: 'top-right',
-          });
-        }
-      },
+      onError: handleMutationError,
     }
   );
 

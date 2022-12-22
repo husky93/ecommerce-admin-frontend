@@ -7,8 +7,8 @@ import { deleteCategory } from '../app/api/api';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getCategory } from '../app/api/api';
 import { useStateContext } from '../context';
-import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
+import { handleMutationError } from '../app/modules';
 
 interface CategoryProps {
   mode: 'update' | 'create';
@@ -37,19 +37,7 @@ const Category: React.FC<CategoryProps> = ({ mode }) => {
         queryClient.invalidateQueries('categories');
         navigate(from);
       },
-      onError: (error: any) => {
-        if (Array.isArray((error as any).response.data.error)) {
-          (error as any).response.data.error.forEach((el: any) =>
-            toast.error(el.message, {
-              position: 'top-right',
-            })
-          );
-        } else {
-          toast.error((error as any).response.data.message, {
-            position: 'top-right',
-          });
-        }
-      },
+      onError: handleMutationError,
     }
   );
 
