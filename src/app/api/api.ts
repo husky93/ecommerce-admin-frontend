@@ -51,9 +51,17 @@ export const getCategory = async (id: string | undefined) => {
   }
 };
 
-export const postCategory = async (category: CategoryInput) => {
-  const response = await authApi.post<Category>('category', category);
-  return response.data;
+export const postCategory = async (
+  category: CategoryInput,
+  token: string | undefined
+) => {
+  if (token) {
+    const response = await authApi.post<Category>('categories', category, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(response.data);
+    return response.data;
+  }
 };
 
 export const getItems = async () => {
