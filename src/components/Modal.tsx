@@ -2,14 +2,18 @@ import React from 'react';
 import styles from '../assets/styles/components/Modal.module.css';
 
 interface ModalProps {
-  isShown: boolean;
+  handleClose: React.MouseEventHandler<HTMLDivElement>;
   children: React.ReactNode;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isShown, children }) => {
+const Modal: React.FC<ModalProps> = ({ handleClose, children }) => {
   return (
-    <div className={`${styles.overlay} ${isShown ? styles.visible : ''}`}>
-      <div className={styles.modal}>{children}</div>
+    <div className={styles.overlay} onClick={handleClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </div>
   );
 };
+
+export default Modal;
