@@ -96,7 +96,8 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
               name="title"
               label="Title:"
               type="text"
-              placeholder="example@website.com"
+              value={data?.title}
+              placeholder="Category Title.."
             />
           </div>
           <div className="input_group">
@@ -104,7 +105,8 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
               name="description"
               label="Description:"
               textarea
-              placeholder="*********"
+              value={data?.description}
+              placeholder="Category Description..."
             />
           </div>
           {isLoading ? <Spinner /> : <button type="submit">Submit</button>}
