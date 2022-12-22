@@ -25,7 +25,6 @@ const FormInput: FC<IFormInputProps> = ({
   return (
     <Controller
       control={control}
-      defaultValue=""
       name={name}
       render={({ field }) => (
         <div>

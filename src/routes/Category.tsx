@@ -21,6 +21,7 @@ const Category: React.FC<CategoryProps> = ({ mode }) => {
       {isLoading && <Spinner />}
       {isError && <span>Error: {(error as any).message}</span>}
       {data && <CategoryForm data={data} mode={mode} />}
+      {mode === 'create' && <CategoryForm mode={mode} />}
     </div>
   );
 };

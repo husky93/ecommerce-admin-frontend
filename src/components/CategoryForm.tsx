@@ -39,6 +39,10 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
 
   const methods = useForm<CategoryInput>({
     resolver: zodResolver(categorySchema),
+    defaultValues: {
+      title: data?.title || '',
+      description: data?.description || '',
+    },
   });
 
   const queryClient = useQueryClient();
@@ -96,8 +100,8 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
               name="title"
               label="Title:"
               type="text"
-              value={data?.title}
               placeholder="Category Title.."
+              id="title"
             />
           </div>
           <div className="input_group">
@@ -105,8 +109,8 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
               name="description"
               label="Description:"
               textarea
-              value={data?.description}
               placeholder="Category Description..."
+              id="description"
             />
           </div>
           {isLoading ? <Spinner /> : <button type="submit">Submit</button>}

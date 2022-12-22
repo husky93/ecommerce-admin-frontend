@@ -13,6 +13,11 @@ const Categories: React.FC = ({}) => {
 
   return (
     <div className={styles.categories}>
+      <div className={styles.ui}>
+        <Link to="/dashboard/categories/new">
+          <button className={styles.btn}>Create New</button>
+        </Link>
+      </div>
       {isLoading && <Spinner />}
       {isError && <span>Error: {(error as any).message}</span>}
       {data && (
