@@ -14,8 +14,8 @@ import { ToastContainer } from 'react-toastify';
 import type { Category } from '../app/api/types';
 
 interface CategoryFormProps {
-  data: Category;
   mode: 'update' | 'create';
+  data?: Category;
 }
 
 const categorySchema = object({
@@ -27,7 +27,7 @@ const categorySchema = object({
 
 export type CategoryInput = TypeOf<typeof categorySchema>;
 
-const CategoryForm: React.FC<CategoryFormProps> = ({ mode }) => {
+const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = useStateContext();
