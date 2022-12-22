@@ -3,13 +3,12 @@ import styles from '../assets/styles/routes/Category.module.css';
 import Spinner from '../components/Spinner';
 import CategoryForm from '../components/CategoryForm';
 import Modal from '../components/Modal';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { deleteCategory } from '../app/api/api';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCategory } from '../app/api/api';
-import { useStateContext } from '../context';
 import { ToastContainer } from 'react-toastify';
-import { handleMutationError } from '../app/modules';
+import { useFormMutation } from '../app/hooks';
 
 interface CategoryProps {
   mode: 'update' | 'create';
@@ -17,31 +16,12 @@ interface CategoryProps {
 
 const Category: React.FC<CategoryProps> = ({ mode }) => {
   const { id } = useParams();
-  const { state } = useStateContext();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const query = useQuery(['categories', id], () => getCategory(id));
-
-  const queryClient = useQueryClient();
-
-  const from =
-    ((location.state as any)?.from.pathname as string) ||
-    '/dashboard/categories';
-
-  const { mutate: deleteCategoryFn, isLoading: isDeleting } = useMutation(
-    () => {
-      return deleteCategory(id, state.authUser?.token);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('categories');
-        navigate(from);
-      },
-      onError: handleMutationError,
-    }
+  const { mutate, isLoading: isDeleting } = useFormMutation(
+    deleteCategory,
+    'categories'
   );
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const query = useQuery(['categories', id], () => getCategory(id));
 
   const handleDeleteClick: React.MouseEventHandler<
     HTMLButtonElement
@@ -52,7 +32,7 @@ const Category: React.FC<CategoryProps> = ({ mode }) => {
   const handleConfirmClick: React.MouseEventHandler<
     HTMLButtonElement
   > = (): void => {
-    deleteCategoryFn();
+    mutate(null);
     setIsModalVisible(false);
   };
 
