@@ -6,9 +6,9 @@ import type { Category, Item, Transaction } from '../app/api/types';
 
 export const useFormMutation = (
   apiRequest: (
-    data: any,
     token: string | undefined,
-    id?: string | undefined
+    id?: string | undefined,
+    data?: any
   ) => Promise<Category | Item | Transaction | undefined>,
   name: 'categories' | 'items' | 'transactions'
 ) => {
@@ -23,7 +23,14 @@ export const useFormMutation = (
   const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation(
-    (data: any) => apiRequest(data, state.authUser?.token, id),
+    (data: any) => {
+      if (!data) {
+        return apiRequest(state.authUser?.token, id);
+      }
+      if (!id) {
+        return apiRequest(state.authUser?.token, data);
+      } else return apiRequest(state.authUser?.token, id, data);
+    },
     {
       onSuccess: () => {
         queryClient.invalidateQueries(name);

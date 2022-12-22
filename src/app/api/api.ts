@@ -52,8 +52,8 @@ export const getCategory = async (id: string | undefined) => {
 };
 
 export const postCategory = async (
-  category: CategoryInput,
-  token: string | undefined
+  token: string | undefined,
+  category: CategoryInput
 ) => {
   if (token) {
     const response = await authApi.post<Category>('categories', category, {
@@ -64,9 +64,9 @@ export const postCategory = async (
 };
 
 export const putCategory = async (
-  updatedCategory: CategoryInput,
   token: string | undefined,
-  id: string | undefined
+  id: string | undefined,
+  updatedCategory: CategoryInput
 ) => {
   if (id && token) {
     const response = await authApi.put<Category>(
@@ -81,8 +81,8 @@ export const putCategory = async (
 };
 
 export const deleteCategory = async (
-  id: string | undefined,
-  token: string | undefined
+  token: string | undefined,
+  id: string | undefined
 ) => {
   if (id && token) {
     const response = await authApi.delete<Category>(`categories/${id}`, {
@@ -114,8 +114,8 @@ export const getTransactions = async (token: string | undefined) => {
 };
 
 export const getTransaction = async (
-  id: string | undefined,
-  token: string | undefined
+  token: string | undefined,
+  id: string | undefined
 ) => {
   if (id && token) {
     const response = await authApi.get<Transaction>(`transactions/${id}`, {
