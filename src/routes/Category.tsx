@@ -65,7 +65,7 @@ const Category: React.FC<CategoryProps> = ({ mode }) => {
   return (
     <div className={styles.category}>
       <ToastContainer />
-      {query.isLoading || (isDeleting && <Spinner />)}
+      {(query.isLoading || isDeleting) && <Spinner />}
       {query.isError && <span>Error: {(query.error as any).message}</span>}
       {query.data && (
         <div>

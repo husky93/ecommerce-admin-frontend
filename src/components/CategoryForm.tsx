@@ -5,12 +5,9 @@ import styles from '../assets/styles/components/CategoryForm.module.css';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useStateContext } from '../context';
-import { useMutation, useQueryClient } from 'react-query';
-import { postCategory, putCategory, getCategories } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
-import { handleMutationError } from '../app/modules';
+import { useFormMutation } from '../app/hooks';
+import { postCategory, putCategory } from '../app/api/api';
 import type { Category } from '../app/api/types';
 
 interface CategoryFormProps {
@@ -28,14 +25,8 @@ const categorySchema = object({
 export type CategoryInput = TypeOf<typeof categorySchema>;
 
 const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { state } = useStateContext();
-  const { id } = useParams();
-
-  const from =
-    ((location.state as any)?.from.pathname as string) ||
-    '/dashboard/categories';
+  const apiRequest = mode === 'create' ? postCategory : putCategory;
+  const { mutate, isLoading } = useFormMutation(apiRequest, 'categories');
 
   const methods = useForm<CategoryInput>({
     resolver: zodResolver(categorySchema),
@@ -45,37 +36,10 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
     },
   });
 
-  const queryClient = useQueryClient();
-
-  const { mutate: postCategoryFn, isLoading } = useMutation(
-    (categoryData: CategoryInput) => {
-      if (mode === 'create')
-        return postCategory(categoryData, state.authUser?.token);
-      else return putCategory(categoryData, id, state.authUser?.token);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('categories');
-        navigate(from);
-      },
-      onError: handleMutationError,
-    }
-  );
-
-  const {
-    reset,
-    handleSubmit,
-    formState: { isSubmitSuccessful },
-  } = methods;
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful]);
+  const { handleSubmit } = methods;
 
   const onSubmitHandler: SubmitHandler<CategoryInput> = (values) => {
-    postCategoryFn(values);
+    mutate(values);
   };
 
   return (

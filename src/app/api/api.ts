@@ -65,8 +65,8 @@ export const postCategory = async (
 
 export const putCategory = async (
   updatedCategory: CategoryInput,
-  id: string | undefined,
-  token: string | undefined
+  token: string | undefined,
+  id: string | undefined
 ) => {
   if (id && token) {
     const response = await authApi.put<Category>(
