@@ -47,7 +47,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
     (categoryData: CategoryInput) => {
       if (mode === 'create')
         return postCategory(categoryData, state.authUser?.token);
-      else return putCategory(categoryData, state.authUser?.token, id);
+      else return putCategory(categoryData, id, state.authUser?.token);
     },
     {
       onSuccess: () => {
