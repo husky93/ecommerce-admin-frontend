@@ -59,7 +59,23 @@ export const postCategory = async (
     const response = await authApi.post<Category>('categories', category, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response.data);
+    return response.data;
+  }
+};
+
+export const putCategory = async (
+  updatedCategory: CategoryInput,
+  token: string | undefined,
+  id: string | undefined
+) => {
+  if (id && token) {
+    const response = await authApi.put<Category>(
+      `categories/${id}`,
+      updatedCategory,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   }
 };
