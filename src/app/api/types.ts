@@ -53,6 +53,14 @@ export interface Item {
   __v: number;
 }
 
+export interface ItemInput {
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  num_in_stock: number;
+}
+
 export interface TransactionItem {
   item: Item;
   quantity: number;

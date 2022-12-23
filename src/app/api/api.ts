@@ -6,6 +6,7 @@ import type {
   Category,
   CategoryInput,
   Item,
+  ItemInput,
   ItemsGet,
   Transaction,
   TransactionsGet,
@@ -100,6 +101,28 @@ export const getItems = async () => {
 export const getItem = async (id: string | undefined) => {
   if (id) {
     const response = await authApi.get<Item>(`items/${id}`);
+    return response.data;
+  }
+};
+
+export const postItem = async (token: string | undefined, item: ItemInput) => {
+  if (token) {
+    const response = await authApi.post<Category>('items', item, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  }
+};
+
+export const putItem = async (
+  token: string | undefined,
+  id: string | undefined,
+  updatedItem: ItemInput
+) => {
+  if (id && token) {
+    const response = await authApi.put<Category>(`items/${id}`, updatedItem, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   }
 };
