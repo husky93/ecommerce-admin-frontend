@@ -5,6 +5,7 @@ import FormInput from './FormInput';
 import SelectInput from './SelectInput';
 import { useQuery } from 'react-query';
 import { getCategories } from '../app/api/api';
+import { ToastContainer } from 'react-toastify';
 
 interface ItemFormProps {
   mode: 'create' | 'update';
@@ -28,7 +29,12 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode }) => {
     'categories',
     getCategories
   );
-  return <></>;
+
+  return (
+    <div>
+      <ToastContainer />
+    </div>
+  );
 };
 
 export default ItemForm;
