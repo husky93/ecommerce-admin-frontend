@@ -1,13 +1,18 @@
 import React from 'react';
-import { Item } from '../app/api/types';
-import { object, string, number, TypeOf } from 'zod';
 import FormInput from './FormInput';
 import SelectInput from './SelectInput';
+import Spinner from './Spinner';
+import styles from '../assets/styles/components/ItemForm.module.css';
+import { object, string, number, TypeOf } from 'zod';
 import { useQuery } from 'react-query';
-import { getCategories } from '../app/api/api';
+import { getCategories, postItem, putItem } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useFormMutation } from '../app/hooks';
+
+import type { SubmitHandler } from 'react-hook-form';
+import type { Item } from '../app/api/types';
 
 interface ItemFormProps {
   mode: 'create' | 'update';
@@ -28,11 +33,14 @@ export type ItemInput = TypeOf<typeof itemSchema>;
 
 const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
   const {
-    isError,
-    isLoading,
+    isError: isCategoriesError,
+    isLoading: isCategoriesLoading,
     data: categories,
     error,
   } = useQuery('categories', getCategories);
+
+  const apiRequest = mode === 'create' ? postItem : putItem;
+  const { mutate, isLoading } = useFormMutation(apiRequest, 'categories');
 
   const methods = useForm<ItemInput>({
     resolver: zodResolver(itemSchema),
@@ -45,9 +53,63 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
     },
   });
 
+  const { handleSubmit } = methods;
+
+  const onSubmitHandler: SubmitHandler<ItemInput> = (values) => {
+    mutate(values);
+  };
+
   return (
     <div>
       <ToastContainer />
+      <FormProvider {...methods}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmitHandler)}>
+          <div className="input_group">
+            <FormInput
+              name="title"
+              label="Title:"
+              type="text"
+              placeholder="Category Title.."
+              id="title"
+            />
+          </div>
+          <div className="input_group">
+            <FormInput
+              name="description"
+              label="Description:"
+              textarea
+              placeholder="Category Description..."
+              id="description"
+            />
+          </div>
+          <div className="input_group">
+            <SelectInput
+              label="Category:"
+              name="category"
+              error={isCategoriesError}
+              options={categories}
+            />
+          </div>
+          <div className="input_group">
+            <FormInput
+              name="price"
+              label="Price:"
+              placeholder="Price"
+              type="number"
+            />
+            <span>$</span>
+          </div>
+          <div className="input_group">
+            <FormInput
+              name="num_in_stock"
+              label="Number In Stock:"
+              placeholder="100"
+              type="number"
+            />
+          </div>
+          {isLoading ? <Spinner /> : <button type="submit">Submit</button>}
+        </form>
+      </FormProvider>
     </div>
   );
 };
