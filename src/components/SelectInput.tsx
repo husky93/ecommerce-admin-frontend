@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import styles from '../assets/styles/components/SelectInput.module.css';
 import type { Category } from '../app/api/types';
-import Category from '../routes/Category';
 
 type IFormInputProps = {
   name: string;
@@ -11,7 +10,7 @@ type IFormInputProps = {
   [x: string]: any;
 };
 
-const FormInput: FC<IFormInputProps> = ({
+const SelectInput: FC<IFormInputProps> = ({
   name,
   label,
   options,
@@ -30,6 +29,7 @@ const FormInput: FC<IFormInputProps> = ({
         <div>
           <label>{label}</label>
           <select {...field} {...otherProps}>
+            <option value="">Please choose a category</option>
             {options.map((option) => (
               <option value={option._id}>{option.title}</option>
             ))}
@@ -43,4 +43,4 @@ const FormInput: FC<IFormInputProps> = ({
   );
 };
 
-export default FormInput;
+export default SelectInput;
