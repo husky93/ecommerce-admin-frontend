@@ -1,6 +1,10 @@
 import React from 'react';
 import { Item } from '../app/api/types';
 import { object, string, number, TypeOf } from 'zod';
+import FormInput from './FormInput';
+import SelectInput from './SelectInput';
+import { useQuery } from 'react-query';
+import { getCategories } from '../app/api/api';
 
 interface ItemFormProps {
   mode: 'create' | 'update';
@@ -20,6 +24,10 @@ const itemSchema = object({
 export type ItemInput = TypeOf<typeof itemSchema>;
 
 const ItemForm: React.FC<ItemFormProps> = ({ mode }) => {
+  const { isError, isLoading, data, error } = useQuery(
+    'categories',
+    getCategories
+  );
   return <></>;
 };
 
