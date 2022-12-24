@@ -3,7 +3,7 @@ import FormInput from './FormInput';
 import SelectInput from './SelectInput';
 import Spinner from './Spinner';
 import styles from '../assets/styles/components/ItemForm.module.css';
-import { object, string, number, TypeOf } from 'zod';
+import { object, string, number, TypeOf, preprocess } from 'zod';
 import { useQuery } from 'react-query';
 import { getCategories, postItem, putItem } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
@@ -25,8 +25,14 @@ const itemSchema = object({
     .max(150, 'Title must have maximum 150 characters'),
   description: string().min(1, 'Description is required'),
   category: string().min(1, 'Category is required'),
-  price: number().positive('Price must be positive number'),
-  num_in_stock: number().int('Number in Stock must be Integer'),
+  price: preprocess(
+    (val) => parseInt(string().parse(val), 10),
+    number().positive('Price must be positive number')
+  ),
+  num_in_stock: preprocess(
+    (val) => parseInt(string().parse(val), 10),
+    number().int('Number in Stock must be Integer')
+  ),
 });
 
 export type ItemInput = TypeOf<typeof itemSchema>;
@@ -40,7 +46,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
   } = useQuery('categories', getCategories);
 
   const apiRequest = mode === 'create' ? postItem : putItem;
-  const { mutate, isLoading } = useFormMutation(apiRequest, 'categories');
+  const { mutate, isLoading } = useFormMutation(apiRequest, 'items');
 
   const methods = useForm<ItemInput>({
     resolver: zodResolver(itemSchema),
