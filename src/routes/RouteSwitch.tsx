@@ -39,7 +39,8 @@ const RouteSwitch: React.FC<RouteSwitchProps> = ({}) => {
             <Route path="categories/:id" element={<Category mode="update" />} />
             <Route path="categories/new" element={<Category mode="create" />} />
             <Route path="items" element={<Items />} />
-            <Route path="items/:id" element={<Item />} />
+            <Route path="items/:id" element={<Item mode="update" />} />
+            <Route path="items/new" element={<Item mode="create" />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="transactions/:id" element={<Transaction />} />
           </Route>

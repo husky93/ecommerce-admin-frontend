@@ -10,6 +10,11 @@ const Items: React.FC = ({}) => {
 
   return (
     <div className={styles.items}>
+      <div className={styles.ui}>
+        <Link to="/dashboard/items/new">
+          <button className={styles.btn}>Create New</button>
+        </Link>
+      </div>
       {isLoading && <Spinner />}
       {isError && <span>Error: {(error as any).message}</span>}
       {data && (
