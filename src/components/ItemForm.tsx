@@ -6,6 +6,8 @@ import SelectInput from './SelectInput';
 import { useQuery } from 'react-query';
 import { getCategories } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 interface ItemFormProps {
   mode: 'create' | 'update';
@@ -24,11 +26,24 @@ const itemSchema = object({
 
 export type ItemInput = TypeOf<typeof itemSchema>;
 
-const ItemForm: React.FC<ItemFormProps> = ({ mode }) => {
-  const { isError, isLoading, data, error } = useQuery(
-    'categories',
-    getCategories
-  );
+const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
+  const {
+    isError,
+    isLoading,
+    data: categories,
+    error,
+  } = useQuery('categories', getCategories);
+
+  const methods = useForm<ItemInput>({
+    resolver: zodResolver(itemSchema),
+    defaultValues: {
+      title: data?.title || '',
+      description: data?.description || '',
+      category: data?.category._id || '',
+      price: data?.price || 0,
+      num_in_stock: data?.num_in_stock || 0,
+    },
+  });
 
   return (
     <div>
