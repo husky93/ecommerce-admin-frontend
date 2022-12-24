@@ -8,7 +8,10 @@ import { getCategories } from '../app/api/api';
 const Categories: React.FC = ({}) => {
   const { isLoading, isError, data, error } = useQuery(
     'categories',
-    getCategories
+    getCategories,
+    {
+      initialData: [],
+    }
   );
 
   return (

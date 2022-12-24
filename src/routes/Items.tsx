@@ -6,7 +6,9 @@ import { getItems } from '../app/api/api';
 import { useQuery } from 'react-query';
 
 const Items: React.FC = ({}) => {
-  const { isLoading, isError, data, error } = useQuery('items', getItems);
+  const { isLoading, isError, data, error } = useQuery('items', getItems, {
+    initialData: [],
+  });
 
   return (
     <div className={styles.items}>
