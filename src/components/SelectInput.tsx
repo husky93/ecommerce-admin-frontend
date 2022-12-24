@@ -7,6 +7,7 @@ type IFormInputProps = {
   name: string;
   label: string;
   options: Array<Category>;
+  error?: boolean;
   [x: string]: any;
 };
 
@@ -14,6 +15,7 @@ const SelectInput: FC<IFormInputProps> = ({
   name,
   label,
   options,
+  error,
   ...otherProps
 }) => {
   const {
@@ -28,12 +30,16 @@ const SelectInput: FC<IFormInputProps> = ({
       render={({ field }) => (
         <div>
           <label>{label}</label>
-          <select {...field} {...otherProps}>
-            <option value="">Please choose a category</option>
-            {options.map((option) => (
-              <option value={option._id}>{option.title}</option>
-            ))}
-          </select>
+          {error ? (
+            <div>Error! Could not load categories.</div>
+          ) : (
+            <select {...field} {...otherProps}>
+              <option value="">Please choose a category</option>
+              {options.map((option) => (
+                <option value={option._id}>{option.title}</option>
+              ))}
+            </select>
+          )}
           <div className={styles.error}>
             {errors[name] && errors[name].message}
           </div>
