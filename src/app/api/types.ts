@@ -1,5 +1,7 @@
 export interface UserPost {
   user: {
+    name: string;
+    surname: string;
     address: {
       city: string;
       zip_code: string;
