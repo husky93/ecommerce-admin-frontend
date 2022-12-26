@@ -10,6 +10,7 @@ import type {
   ItemsGet,
   Transaction,
   TransactionsGet,
+  User,
 } from './types';
 const BASE_URL = 'https://express-shop-api-production.up.railway.app/';
 
@@ -139,6 +140,18 @@ export const getTransaction = async (
 ) => {
   if (id && token) {
     const response = await authApi.get<Transaction>(`transactions/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  }
+};
+
+export const getUser = async (
+  token: string | undefined,
+  id: string | undefined
+) => {
+  if (id && token) {
+    const response = await authApi.get<User>(`transactions/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
