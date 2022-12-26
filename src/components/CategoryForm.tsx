@@ -3,7 +3,7 @@ import FormInput from './FormInput';
 import Spinner from './Spinner';
 import styles from '../assets/styles/components/CategoryForm.module.css';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { object, string, TypeOf } from 'zod';
+import { object, string, number, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ToastContainer } from 'react-toastify';
 import { useFormMutation } from '../app/hooks';

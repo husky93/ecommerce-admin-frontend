@@ -75,7 +75,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
               name="title"
               label="Title:"
               type="text"
-              placeholder="Category Title.."
+              placeholder="Item name..."
               id="title"
             />
           </div>
@@ -84,7 +84,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
               name="description"
               label="Description:"
               textarea
-              placeholder="Category Description..."
+              placeholder="Item description..."
               id="description"
             />
           </div>

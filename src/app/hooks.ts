@@ -2,14 +2,14 @@ import { handleMutationError } from '../app/modules';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
 import { useStateContext } from '../context';
-import type { Category, Item, Transaction } from '../app/api/types';
+import type {
+  PostApiRequest,
+  PutApiRequest,
+  DeleteApiRequest,
+} from '../app/api/types';
 
 export const useFormMutation = (
-  apiRequest: (
-    token: string | undefined,
-    id?: string | undefined,
-    data?: any
-  ) => Promise<Category | Item | Transaction | undefined>,
+  apiRequest: PutApiRequest | PostApiRequest | DeleteApiRequest,
   name: 'categories' | 'items' | 'transactions'
 ) => {
   const location = useLocation();
@@ -25,11 +25,12 @@ export const useFormMutation = (
   const { mutate, isLoading } = useMutation(
     (data: any) => {
       if (!data) {
-        return apiRequest(state.authUser?.token, id);
+        return (apiRequest as DeleteApiRequest)(state.authUser?.token, id);
       }
       if (!id) {
-        return apiRequest(state.authUser?.token, data);
-      } else return apiRequest(state.authUser?.token, id, data);
+        return (apiRequest as PostApiRequest)(state.authUser?.token, data);
+      } else
+        return (apiRequest as PutApiRequest)(state.authUser?.token, id, data);
     },
     {
       onSuccess: () => {

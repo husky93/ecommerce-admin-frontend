@@ -74,6 +74,28 @@ export interface Transaction {
   __v: number;
 }
 
+export interface TransactionInput {
+  user: User;
+  items: Array<TransactionItem>;
+  status: 'pending' | 'delivered' | 'payment failed' | 'cancelled' | 'paid';
+}
+
+export type PostApiRequest = (
+  token: string | undefined,
+  data: any
+) => Promise<Category | Item | undefined>;
+
+export type PutApiRequest = (
+  token: string | undefined,
+  id: string | undefined,
+  data: any
+) => Promise<Category | Item | Transaction | undefined>;
+
+export type DeleteApiRequest = (
+  token: string | undefined,
+  id: string | undefined
+) => Promise<Category | Item | Transaction | undefined>;
+
 export type CategoriesGet = Array<Category>;
 
 export type ItemsGet = Array<Item>;
