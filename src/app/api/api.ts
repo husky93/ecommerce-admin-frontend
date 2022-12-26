@@ -146,6 +146,23 @@ export const getTransaction = async (
   }
 };
 
+export const putTransaction = async (
+  token: string | undefined,
+  id: string | undefined,
+  updatedData: Transaction
+) => {
+  if (id && token) {
+    const response = await authApi.put<Transaction>(
+      `transactions/${id}`,
+      updatedData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response.data;
+  }
+};
+
 export const getUser = async (
   token: string | undefined,
   id: string | undefined

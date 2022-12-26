@@ -1,15 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useState } from 'react';
 import styles from '../assets/styles/routes/Transaction.module.css';
 import Spinner from '../components/Spinner';
+import Select from 'react-select';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { getTransaction } from '../app/api/api';
 import { useStateContext } from '../context';
+import { useFormMutation } from '../app/hooks';
+import { putTransaction } from '../app/api/api';
+import type { ActionMeta } from 'react-select';
+
+const selectOptions = [
+  { value: 'pending', label: 'Pending' },
+  { value: 'delivered', label: 'Delivered' },
+  { value: 'payment failed', label: 'Payment Failed' },
+  { value: 'cancelled', label: 'Cancelled' },
+  { value: 'paid', label: 'Paid' },
+];
 
 const Transaction: React.FC = ({}) => {
   const { id } = useParams();
   const { state } = useStateContext();
   const [totalPrice, setTotalPrice] = useState(0);
+  const [transactionStatus, setTransactionStatus] = useState('');
+  const { mutate, isLoading: isMutationLoading } = useFormMutation(
+    putTransaction,
+    `transactions`,
+    true
+  );
 
   const {
     isLoading,
@@ -26,12 +44,32 @@ const Transaction: React.FC = ({}) => {
             return prevValue + obj.item.price * obj.quantity;
           }, 0);
           setTotalPrice(total);
+          setTransactionStatus(data.status);
         }
       },
     }
   );
 
-  console.log(transaction);
+  const onSelectChange: (newValue: any, actionMeta: ActionMeta<any>) => void = (
+    newValue
+  ) => {
+    console.log({
+      ...transaction,
+      status: newValue.value,
+      user: transaction?.user._id,
+      items: transaction?.items.map((element) => {
+        return { item: element.item._id, quantity: element.quantity };
+      }),
+    });
+    mutate({
+      ...transaction,
+      status: newValue.value,
+      user: transaction?.user._id,
+      items: transaction?.items.map((element) => {
+        return { item: element.item._id, quantity: element.quantity };
+      }),
+    });
+  };
 
   return (
     <div className={styles.transaction}>
@@ -71,10 +109,19 @@ const Transaction: React.FC = ({}) => {
                 <div>Sum: {element.quantity * element.item.price}$</div>
               </li>
             ))}
-            <div className={styles.total}>
-              Total Price: <span>{totalPrice}$</span>
-            </div>
           </ul>
+          <div className={styles.total}>
+            Total Transaction Price: <span>{totalPrice}$</span>
+          </div>
+          <div className={styles.status}>
+            <Select
+              onChange={onSelectChange}
+              options={selectOptions}
+              defaultValue={selectOptions.find(
+                (item) => item.value === transaction.status
+              )}
+            />
+          </div>
         </div>
       )}
     </div>

@@ -10,7 +10,8 @@ import type {
 
 export const useFormMutation = (
   apiRequest: PutApiRequest | PostApiRequest | DeleteApiRequest,
-  name: 'categories' | 'items' | 'transactions'
+  name: string,
+  goToId?: boolean
 ) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ export const useFormMutation = (
   const { id } = useParams();
 
   const from =
-    ((location.state as any)?.from.pathname as string) || `/dashboard/${name}`;
+    ((location.state as any)?.from.pathname as string) ||
+    `/dashboard/${goToId ? `${name}/${id}` : name}`;
 
   const queryClient = useQueryClient();
 
@@ -34,7 +36,7 @@ export const useFormMutation = (
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(name);
+        queryClient.invalidateQueries({ queryKey: [name] });
         navigate(from);
       },
       onError: handleMutationError,
