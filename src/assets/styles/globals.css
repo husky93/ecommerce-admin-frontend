@@ -1,8 +1,10 @@
 :root {
   --app-bg-color: #E1E4EC;
   --app-inner-bg-color: #FFFFFF;
-  --primary-color: #18DDBD;
-  --secondary-color: #FB896B;
+  --primary-color: #FB896B;
+  --primary-color-hover: #E07A60;
+  --primary-color-active: #BA6550;
+  --secondary-color: #18DDBD;
   --tertiary-color: #51459F;
   --logo-text-color: #3b4566;
   --light-text-color: #7A7A7A;
@@ -51,6 +53,25 @@ body::before {
     70%,
     transparent
   )
+}
+
+.btn-primary {
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all .150s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.btn-primary:active {
+  background-color: var(--primary-color-active);
 }
 
 #root {

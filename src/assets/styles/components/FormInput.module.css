@@ -9,6 +9,7 @@
 }
 
 .label input {
+  font-size: 0.9rem;
   padding: 12px 14px;
   border-radius: 6px;
   transition: all .150s ease-in-out;
