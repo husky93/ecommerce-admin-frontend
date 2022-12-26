@@ -4,6 +4,7 @@ import Spinner from '../components/Spinner';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { getCategories } from '../app/api/api';
+import type { AxiosError } from 'axios';
 
 const Categories: React.FC = ({}) => {
   const { isLoading, isError, data, error } = useQuery(
@@ -22,7 +23,13 @@ const Categories: React.FC = ({}) => {
         </Link>
       </div>
       {isLoading && <Spinner />}
-      {isError && <span>Error: {(error as any).message}</span>}
+      {isError && (
+        <span>
+          {(error as AxiosError).response?.status === 404
+            ? 'No categories found'
+            : `Error: ${(error as AxiosError).message}`}
+        </span>
+      )}
       {data && (
         <div>
           {data.map((category) => (

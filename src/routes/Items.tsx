@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../assets/styles/routes/Items.module.css';
 import Spinner from '../components/Spinner';
 import { Link } from 'react-router-dom';
 import { getItems } from '../app/api/api';
 import { useQuery } from 'react-query';
+import type { AxiosError } from 'axios';
 
 const Items: React.FC = ({}) => {
-  const { isLoading, isError, data, error } = useQuery('items', getItems, {
-    initialData: [],
-  });
+  const { isLoading, isError, data, error } = useQuery('items', getItems);
 
   return (
     <div className={styles.items}>
@@ -18,7 +17,13 @@ const Items: React.FC = ({}) => {
         </Link>
       </div>
       {isLoading && <Spinner />}
-      {isError && <span>Error: {(error as any).message}</span>}
+      {isError && (
+        <span>
+          {(error as AxiosError).response?.status === 404
+            ? 'No items found'
+            : `Error: ${(error as AxiosError).message}`}
+        </span>
+      )}
       {data && (
         <div>
           {data.map((item) => (
