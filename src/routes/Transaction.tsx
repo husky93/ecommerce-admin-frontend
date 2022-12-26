@@ -12,7 +12,7 @@ const Transaction: React.FC = ({}) => {
 
   const { isLoading, isError, data, error } = useQuery(
     ['transactions', id],
-    () => getTransaction(id, state.authUser?.token)
+    () => getTransaction(state.authUser?.token, id)
   );
 
   return (
