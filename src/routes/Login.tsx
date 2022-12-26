@@ -90,13 +90,15 @@ const Login: React.FC<LoginProps> = ({}) => {
               placeholder="*********"
             />
           </div>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <button type="submit" className="btn-primary">
-              Login
-            </button>
-          )}
+          <div className={styles.ui}>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <button type="submit" className="btn-primary">
+                Login
+              </button>
+            )}
+          </div>
         </form>
       </FormProvider>
     </main>
