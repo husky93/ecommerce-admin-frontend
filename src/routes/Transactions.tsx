@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getTransactions } from '../app/api/api';
 import { useStateContext } from '../context';
+import type { AxiosError } from 'axios';
 
 const Transactions: React.FC = ({}) => {
   const { state } = useStateContext();
@@ -15,7 +16,13 @@ const Transactions: React.FC = ({}) => {
   return (
     <div>
       {isLoading && <Spinner />}
-      {isError && <span>Error: {(error as any).message}</span>}
+      {isError && (
+        <span>
+          {(error as AxiosError).response?.status === 404
+            ? 'No categories found'
+            : `Error: ${(error as AxiosError).message}`}
+        </span>
+      )}
       {data && (
         <div>
           {data.map((transaction) => (
