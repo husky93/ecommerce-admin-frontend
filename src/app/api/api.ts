@@ -20,21 +20,6 @@ const authApi = axios.create({
 
 authApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-authApi.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    const originalRequest = error.config;
-    const errMessage = error.response.data.message as string;
-    if (errMessage.includes('not logged in') && !originalRequest._retry) {
-      originalRequest._retry = true;
-      return authApi(originalRequest);
-    }
-    return Promise.reject(error);
-  }
-);
-
 export const loginUser = async (user: LoginInput) => {
   const response = await authApi.post<UserPost>('auth/login', user);
   return response.data;
@@ -107,7 +92,7 @@ export const getItem = async (id: string | undefined) => {
 
 export const postItem = async (token: string | undefined, item: ItemInput) => {
   if (token) {
-    const response = await authApi.post<Category>('items', item, {
+    const response = await authApi.post<Item>('items', item, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -120,7 +105,7 @@ export const putItem = async (
   updatedItem: ItemInput
 ) => {
   if (id && token) {
-    const response = await authApi.put<Category>(`items/${id}`, updatedItem, {
+    const response = await authApi.put<Item>(`items/${id}`, updatedItem, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
