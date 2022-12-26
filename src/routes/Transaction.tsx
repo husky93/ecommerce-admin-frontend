@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../assets/styles/routes/Transaction.module.css';
 import Spinner from '../components/Spinner';
 import { useQuery } from 'react-query';
@@ -9,14 +9,26 @@ import { useStateContext } from '../context';
 const Transaction: React.FC = ({}) => {
   const { id } = useParams();
   const { state } = useStateContext();
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const {
     isLoading,
     isError,
     data: transaction,
     error,
-  } = useQuery(['transactions', id], () =>
-    getTransaction(state.authUser?.token, id)
+  } = useQuery(
+    ['transactions', id],
+    () => getTransaction(state.authUser?.token, id),
+    {
+      onSuccess(data) {
+        if (data) {
+          const total = data.items.reduce((prevValue, obj) => {
+            return prevValue + obj.item.price * obj.quantity;
+          }, 0);
+          setTotalPrice(total);
+        }
+      },
+    }
   );
 
   console.log(transaction);
@@ -27,6 +39,7 @@ const Transaction: React.FC = ({}) => {
       {isError && <span>Error: {(error as any).message}</span>}
       {transaction && (
         <div>
+          <h3>Client Info: </h3>
           <div className={styles.user_info}>
             <div>
               Client name:{' '}
@@ -48,6 +61,20 @@ const Transaction: React.FC = ({}) => {
               </div>
             </div>
           </div>
+          <h3>Items: </h3>
+          <ul className={styles.item_list}>
+            {transaction.items.map((element) => (
+              <li className={styles.list_item}>
+                <div>Name: {element.item.title}</div>
+                <div>Price: {element.item.price}$</div>
+                <div>Quantity: {element.quantity}</div>
+                <div>Sum: {element.quantity * element.item.price}$</div>
+              </li>
+            ))}
+            <div className={styles.total}>
+              Total Price: <span>{totalPrice}$</span>
+            </div>
+          </ul>
         </div>
       )}
     </div>
