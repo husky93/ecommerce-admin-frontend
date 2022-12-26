@@ -1,4 +1,7 @@
 import styles from '../assets/styles/routes/Login.module.css';
+import Spinner from '../components/Spinner';
+import FormInput from '../components/FormInput';
+import Logo from '../components/Logo';
 import { useMutation } from 'react-query';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
@@ -9,8 +12,6 @@ import { loginUser } from '../app/api/api';
 import { useStateContext } from '../context';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import Spinner from '../components/Spinner';
-import FormInput from '../components/FormInput';
 import { handleMutationError } from '../app/modules';
 
 interface LoginProps {}
@@ -68,6 +69,9 @@ const Login: React.FC<LoginProps> = ({}) => {
   return (
     <main className={styles.main}>
       <ToastContainer />
+      <div>
+        <Logo text="Ecommerce Admin Dashboard" />
+      </div>
       <FormProvider {...methods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmitHandler)}>
           <div className="input_group">

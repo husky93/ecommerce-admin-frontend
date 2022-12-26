@@ -8,3 +8,10 @@
   width: 30px;
   height: 30px;
 }
+
+.text {
+  color: var(--logo-text-color);
+  font-family: var(--heading-font);
+  font-weight: 400;
+  font-size: 1.45rem;
+}

@@ -10,7 +10,7 @@ const Logo: React.FC<LogoProps> = ({ text }) => {
   return (
     <div className={styles.container}>
       <img src={logoImage} className={styles.logo} />
-      <h1>{text}</h1>
+      <h1 className={styles.text}>{text}</h1>
     </div>
   );
 };
