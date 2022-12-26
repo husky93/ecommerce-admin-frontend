@@ -1,5 +1,39 @@
+:root {
+  --app-bg-color: #E1E4EC;
+  --app-inner-bg-color: #FFFFFF;
+  --primary-color: #18DDBD;
+  --secondary-color: #FB896B;
+  --page-max-width: 1920px;
+  --inner-max-width: 1344px;
+  --page-edge: calc((100vw - var(--page-max-width)) / 2);
+}
+
 body {
-  background-image: linear-gradient(-105deg, #009acc, #363795);
-  background-repeat: no-repeat;
+  position: relative;
+  background-color: var(--app-bg-color);
   min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  opacity: 0.2;
+  filter: blur(6px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(0px);
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(
+    500px circle at 90% 10%,
+    var(--primary-color),
+    70%,
+    transparent
+  ), 
+  radial-gradient(
+    500px circle at 10% 90%,
+    var(--secondary-color),
+    70%,
+    transparent
+  )
 }
