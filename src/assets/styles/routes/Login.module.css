@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 16px;
   flex-direction: column;
   background-color: var(--app-inner-bg-color);
   position: relative;

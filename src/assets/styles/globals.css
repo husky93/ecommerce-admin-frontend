@@ -6,6 +6,7 @@
   --tertiary-color: #51459F;
   --logo-text-color: #3b4566;
   --light-text-color: #7A7A7A;
+  --dark-text-color: #000000;
   --page-max-width: 1920px;
   --inner-max-width: 1344px;
   --box-shadow-md: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -24,6 +25,7 @@ body {
   min-height: 100vh;
   height: 100%;
   font-family: var(--main-font);
+  color: var(--light-text-color);
   font-size: 16px;
 }
 

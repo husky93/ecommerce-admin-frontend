@@ -1,0 +1,42 @@
+.group{
+  margin-bottom: 12px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label input {
+  padding: 12px 14px;
+  border-radius: 6px;
+  transition: all .150s ease-in-out;
+  border: 2px var(--tertiary-color) solid;
+}
+
+.label input:placeholder-shown {
+  border: 2px rgba(177, 177, 177, 0.6) solid;
+}
+
+.label input:placeholder-shown:not(:focus):hover {
+  border: 2px rgba(177, 177, 177, 0.9) solid;
+  background-color: rgba(177, 177, 177, 0.08);
+}
+
+.label input:active, .label input:focus {
+  outline: none;
+  border: 2px var(--tertiary-color) solid;
+  background-color: rgba(177, 177, 177, 0.08);
+  box-shadow: #51459f7a 0px 3px 8px;
+}
+
+.label input:invalid {
+  border: 2px red solid;
+}
+
+.error {
+  margin-top: 2px;
+  font-size: 0.80rem;
+  color: red;
+}

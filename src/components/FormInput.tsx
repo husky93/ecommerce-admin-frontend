@@ -27,8 +27,8 @@ const FormInput: FC<IFormInputProps> = ({
       control={control}
       name={name}
       render={({ field }) => (
-        <div>
-          <label>
+        <div className={styles.group}>
+          <label className={styles.label}>
             {label}
             {textarea ? (
               <textarea {...field} {...otherProps} />

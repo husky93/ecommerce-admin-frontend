@@ -68,8 +68,8 @@ const Login: React.FC<LoginProps> = ({}) => {
 
   return (
     <main className={styles.main}>
-      <ToastContainer />
       <div>
+        <ToastContainer />
         <Logo text="Ecommerce Admin Dashboard" />
       </div>
       <FormProvider {...methods}>
