@@ -11,6 +11,7 @@
   --dark-text-color: #000000;
   --page-max-width: 1920px;
   --inner-max-width: 1344px;
+  --box-shadow-sm: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
   --box-shadow-md: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   --page-edge: calc((100vw - var(--page-max-width)) / 2);
   --main-font: 'Lato', sans-serif;
