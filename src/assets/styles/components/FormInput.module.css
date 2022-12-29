@@ -10,18 +10,18 @@
 
 .label input {
   font-size: 0.9rem;
-  padding: 12px 14px;
+  padding: 12px 24px;
   border-radius: 6px;
   transition: all .150s ease-in-out;
   border: 2px var(--tertiary-color) solid;
 }
 
 .label input:placeholder-shown {
-  border: 2px rgba(177, 177, 177, 0.6) solid;
+  border: 2px rgba(177, 177, 177, 0.7) solid;
 }
 
 .label input:placeholder-shown:not(:focus):hover {
-  border: 2px rgba(177, 177, 177, 0.9) solid;
+  border: 2px rgba(177, 177, 177, 1) solid;
   background-color: rgba(177, 177, 177, 0.08);
 }
 
