@@ -8,3 +8,9 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--dark-text-color);
+}
