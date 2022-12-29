@@ -7,13 +7,11 @@ interface DashboardProps {}
 
 const Dashboard: React.FC<DashboardProps> = ({}) => {
   return (
-    <main>
-      <aside>
+    <main className={styles.main}>
+      <aside className={styles.aside}>
         <Menu />
       </aside>
-      <section>
-        <Outlet />
-      </section>
+      <Outlet />
     </main>
   );
 };

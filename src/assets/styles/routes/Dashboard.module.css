@@ -1,0 +1,15 @@
+.main {
+  padding: 24px 26px;
+  position: relative;
+  background-color: var(--app-inner-bg-color);
+  border-radius: 16px;
+  margin: 48px 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 24px;
+}
+
+.aside {
+  padding: 0 48px;
+}
