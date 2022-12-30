@@ -53,6 +53,7 @@ export interface Item {
   description: string;
   category: Category;
   price: number;
+  margin: number;
   num_in_stock: number;
   __v: number;
 }

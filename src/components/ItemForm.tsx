@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormInput from './FormInput';
 import SelectInput from './SelectInput';
 import Spinner from './Spinner';
 import styles from '../assets/styles/components/ItemForm.module.css';
-import { object, string, number, TypeOf, preprocess } from 'zod';
+import { object, string, number, TypeOf, coerce } from 'zod';
 import { useQuery } from 'react-query';
 import { getCategories, postItem, putItem } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
@@ -25,14 +25,16 @@ const itemSchema = object({
     .max(150, 'Title must have maximum 150 characters'),
   description: string().min(1, 'Description is required'),
   category: string().min(1, 'Category is required'),
-  price: preprocess(
-    (val) => parseInt(string().parse(val), 10),
-    number().positive('Price must be positive number')
-  ),
-  num_in_stock: preprocess(
-    (val) => parseInt(string().parse(val), 10),
-    number().int('Number in Stock must be Integer')
-  ),
+  price: coerce.number().positive('Price must be positive number'),
+  margin: coerce
+    .number()
+    .int('Margin must be Integer')
+    .min(1, 'Margin must be minimum 1%')
+    .max(100, 'Margin must be maximum 100%'),
+  num_in_stock: coerce
+    .number()
+    .min(1, 'Number is required')
+    .int('Number in Stock must be Integer'),
 });
 
 export type ItemInput = TypeOf<typeof itemSchema>;
@@ -48,18 +50,23 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
   const apiRequest = mode === 'create' ? postItem : putItem;
   const { mutate, isLoading } = useFormMutation(apiRequest, 'items');
 
+  useEffect(() => {
+    reset(data);
+  }, [data]);
+
   const methods = useForm<ItemInput>({
     resolver: zodResolver(itemSchema),
     defaultValues: {
-      title: data?.title || '',
-      description: data?.description || '',
-      category: data?.category._id || '',
-      price: data?.price || 0,
-      num_in_stock: data?.num_in_stock || 0,
+      title: '',
+      description: '',
+      category: '',
+      price: 0,
+      margin: 1,
+      num_in_stock: 1,
     },
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmitHandler: SubmitHandler<ItemInput> = (values) => {
     mutate(values);
