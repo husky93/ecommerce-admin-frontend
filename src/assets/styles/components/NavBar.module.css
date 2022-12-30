@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.ui {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile {
+  width: 42px;
+  height: 42px;
+  border-radius: 25%;
+}
+
+.name {
+  color: var(--dark-text-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
