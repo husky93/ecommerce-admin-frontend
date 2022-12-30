@@ -17,7 +17,7 @@
 }
 
 .label input:placeholder-shown {
-  border: 2px rgba(177, 177, 177, 0.25) solid;
+  border: 2px var(--border-color) solid;
 }
 
 .label input:placeholder-shown:not(:focus):hover {

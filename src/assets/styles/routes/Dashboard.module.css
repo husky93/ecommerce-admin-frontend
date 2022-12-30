@@ -1,5 +1,4 @@
 .main {
-  padding: 24px 26px;
   position: relative;
   background-color: var(--app-inner-bg-color);
   border-radius: 16px;
@@ -7,9 +6,13 @@
   height: 100%;
   width: 100%;
   display: flex;
-  gap: 24px;
 }
 
 .aside {
-  padding: 0 48px;
+  padding: 24px 48px;
+  border-right: 2px var(--border-color) solid;
+}
+
+.content {
+  padding: 24px 48px;
 }
