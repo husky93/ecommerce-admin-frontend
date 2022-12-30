@@ -38,7 +38,6 @@ body::before {
   content: '';
   position: absolute;
   opacity: 0.2;
-  filter: blur(6px);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) translateZ(0px);
