@@ -12,7 +12,7 @@ const Home: React.FC = ({}) => {
         <Card title="Sales" variant="secondary">
           Sales: 345$
         </Card>
-        <Card title="Sales" variant="primary">
+        <Card title="Sales" variant="tertiary">
           Sales: 345$
         </Card>
       </div>
