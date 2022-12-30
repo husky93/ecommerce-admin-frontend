@@ -3,10 +3,26 @@
   justify-content: flex-end;
   padding-bottom: 24px;
   margin-bottom: 24px;
+  gap: 18px;
   border-bottom: 2px var(--border-color) solid;
 }
 
 .ui {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ui_btn {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--light-text-color);
+  box-shadow: var(--box-shadow-md);
+  border-radius: var(--border-radius);
+}
+
+.user {
   cursor: pointer;
   display: flex;
   align-items: center;

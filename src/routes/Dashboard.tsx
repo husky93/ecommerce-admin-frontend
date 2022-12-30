@@ -12,7 +12,7 @@ const Dashboard: React.FC<DashboardProps> = ({}) => {
       <aside className={styles.aside}>
         <Menu />
       </aside>
-      <div>
+      <div className={styles.content}>
         <NavBar />
         <Outlet />
       </div>
