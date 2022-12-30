@@ -8,7 +8,12 @@
   gap: 6px;
 }
 
-.label input {
+.label textarea {
+  resize: none;
+  height: 120px;
+}
+
+.label input, .label textarea {
   font-size: 0.9rem;
   padding: 12px 24px;
   border-radius: 6px;
@@ -16,16 +21,16 @@
   border: 2px var(--tertiary-color) solid;
 }
 
-.label input:placeholder-shown {
+.label input:placeholder-shown, .label textarea:placeholder-shown {
   border: 2px var(--border-color) solid;
 }
 
-.label input:placeholder-shown:not(:focus):hover {
+.label input:placeholder-shown:not(:focus):hover, .label textarea:placeholder-shown:not(:focus):hover {
   border: 2px rgba(177, 177, 177, 0.7) solid;
   background-color: rgba(177, 177, 177, 0.08);
 }
 
-.label input:active, .label input:focus {
+.label input:active, .label input:focus, .label textarea:active, .label textarea:focus {
   outline: none;
   border: 2px var(--tertiary-color) solid;
   background-color: rgba(177, 177, 177, 0.08);
