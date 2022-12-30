@@ -99,11 +99,20 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
           <div className="input_group">
             <FormInput
               name="price"
-              label="Price:"
+              label="Price: $ (+VAT)"
               placeholder="Price"
               type="number"
+              id="price"
             />
-            <span>$</span>
+          </div>
+          <div className="input_group">
+            <FormInput
+              name="margin"
+              label="Margin: %"
+              placeholder="1-100"
+              type="number"
+              id="margin"
+            />
           </div>
           <div className="input_group">
             <FormInput
@@ -111,6 +120,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
               label="Number In Stock:"
               placeholder="100"
               type="number"
+              id="num_in_stock"
             />
           </div>
           {isLoading ? <Spinner /> : <button type="submit">Submit</button>}
