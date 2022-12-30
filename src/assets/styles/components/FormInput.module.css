@@ -17,11 +17,11 @@
 }
 
 .label input:placeholder-shown {
-  border: 2px rgba(177, 177, 177, 0.7) solid;
+  border: 2px rgba(177, 177, 177, 0.25) solid;
 }
 
 .label input:placeholder-shown:not(:focus):hover {
-  border: 2px rgba(177, 177, 177, 1) solid;
+  border: 2px rgba(177, 177, 177, 0.7) solid;
   background-color: rgba(177, 177, 177, 0.08);
 }
 
