@@ -53,6 +53,8 @@ export interface Item {
   description: string;
   category: Category;
   price: number;
+  profit: number;
+  price_gross: number;
   margin: number;
   num_in_stock: number;
   __v: number;

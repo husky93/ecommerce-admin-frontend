@@ -6,6 +6,7 @@ const Menu: React.FC = ({}) => {
   return (
     <nav className={styles.menu}>
       <ul>
+        <MenuLink to="/dashboard/">Dashboard</MenuLink>
         <MenuLink to="/dashboard/categories">Categories</MenuLink>
         <MenuLink to="/dashboard/items">Items</MenuLink>
         <MenuLink to="/dashboard/transactions">Transactions</MenuLink>
