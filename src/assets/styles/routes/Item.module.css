@@ -1,0 +1,9 @@
+.heading {
+  color: var(--dark-text-color);
+  margin-bottom: 36px;
+}
+
+.modal_ui {
+  display: flex;
+  gap: 12px;
+}

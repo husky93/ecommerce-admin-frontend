@@ -7,7 +7,7 @@
 }
 
 .item {
-  padding: 18px;
+  padding: 12px;
   border-bottom: 2px var(--border-color) solid;
   display: flex;
   align-items: center;
