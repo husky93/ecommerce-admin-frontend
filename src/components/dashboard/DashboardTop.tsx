@@ -65,20 +65,24 @@ const getDisplayInfo = (data: TransactionsGet | undefined): HomeDisplayInfo => {
   };
   data?.forEach((transaction) => {
     const { items } = transaction;
-    sum = items.reduce((prevValue, el) => {
-      const { quantity, item } = el;
-      const taxes =
-        prevValue.taxes +
-        (el.item.price_gross - item.price - item.profit) * quantity;
-      return {
-        profit: Math.round(prevValue.profit + item.profit * quantity),
-        sold_items: prevValue.sold_items + quantity,
-        taxes: Math.round(taxes),
-        transaction_sum: Math.round(
-          prevValue.transaction_sum + item.price_gross * quantity
-        ),
-      };
-    }, sum);
+    if (
+      transaction.status !== 'cancelled' &&
+      transaction.status !== 'payment failed'
+    )
+      sum = items.reduce((prevValue, el) => {
+        const { quantity, item } = el;
+        const taxes =
+          prevValue.taxes +
+          (el.item.price_gross - item.price - item.profit) * quantity;
+        return {
+          profit: Math.round(prevValue.profit + item.profit * quantity),
+          sold_items: prevValue.sold_items + quantity,
+          taxes: Math.round(taxes),
+          transaction_sum: Math.round(
+            prevValue.transaction_sum + item.price_gross * quantity
+          ),
+        };
+      }, sum);
   });
   return sum;
 };
