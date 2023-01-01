@@ -66,6 +66,13 @@ const Login: React.FC<LoginProps> = ({}) => {
     loginUserFn(values);
   };
 
+  const testDriveAccount: React.MouseEventHandler<HTMLButtonElement> = () => {
+    onSubmitHandler({
+      username: 'maciek4@example.com',
+      password: 'Kotek123456',
+    });
+  };
+
   return (
     <main className={styles.main}>
       <div>
@@ -94,9 +101,14 @@ const Login: React.FC<LoginProps> = ({}) => {
             {isLoading ? (
               <Spinner />
             ) : (
-              <button type="submit" className="btn-primary">
-                Login
-              </button>
+              <>
+                <button type="submit" className="btn-primary">
+                  Login
+                </button>
+                <button className="btn-primary" onClick={testDriveAccount}>
+                  Test Drive Existing Account
+                </button>
+              </>
             )}
           </div>
         </form>
