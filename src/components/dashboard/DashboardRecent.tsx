@@ -32,9 +32,11 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
       )}
       {data && (
         <div className={styles.dashboard_recent}>
-          <h2 className={styles.heading}>Recent Transactions</h2>
+          <div className={styles.recent_top}>
+            <h2 className={styles.heading}>Recent Transactions</h2>
+          </div>
           <table className={styles.table}>
-            <thead>
+            <thead className={styles.thead}>
               <tr>
                 <th className={styles.th}>ID</th>
                 <th className={styles.th}>Date Created</th>
@@ -43,25 +45,27 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
                 <th className={styles.th}>Value</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={styles.tbody}>
               {data.map((item) => (
                 <tr key={item._id}>
                   <td className={styles.td}>
                     <Link to={`transactions/${item._id}`}>{item._id}</Link>
                   </td>
-                  <td className={styles.td}>
+                  <td className={`${styles.td} ${styles.date}`}>
                     {format(new Date(item.createdAt), 'HH:mm, do MMM yyyy')}
                   </td>
                   <td
                     className={styles.td}
                   >{`${item.user.name} ${item.user.surname}`}</td>
                   <td
-                    className={styles.td}
+                    className={`${styles.td} ${styles.status}`}
                     style={{ color: setStatusColor(item.status) }}
                   >
                     {item.status}
                   </td>
-                  <td className={styles.td}>{getAllItemsSum(item.items)}USD</td>
+                  <td className={`${styles.td} ${styles.value}`}>
+                    {getAllItemsSum(item.items)}USD
+                  </td>
                 </tr>
               ))}
             </tbody>
