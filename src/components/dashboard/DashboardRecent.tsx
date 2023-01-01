@@ -6,7 +6,7 @@ import { getTransactions } from '../../app/api/api';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import type { AxiosError } from 'axios';
-import type { TransactionItem } from '../../app/api/types';
+import type { TransactionItem, TransactionStatus } from '../../app/api/types';
 
 interface DashboardRecentProps {
   userToken: string | undefined;
@@ -17,7 +17,7 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
     ['transactions', 'recent'],
     () => getTransactions(userToken, true)
   );
-  console.log(data);
+
   return (
     <>
       {isLoading && (
@@ -33,7 +33,7 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
       {data && (
         <div className={styles.dashboard_recent}>
           <h2 className={styles.heading}>Recent Transactions</h2>
-          <table className={styles.list}>
+          <table className={styles.table}>
             <thead>
               <tr>
                 <th className={styles.th}>ID</th>
@@ -55,7 +55,12 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
                   <td
                     className={styles.td}
                   >{`${item.user.name} ${item.user.surname}`}</td>
-                  <td className={styles.td}>{item.status}</td>
+                  <td
+                    className={styles.td}
+                    style={{ color: setStatusColor(item.status) }}
+                  >
+                    {item.status}
+                  </td>
                   <td className={styles.td}>{getAllItemsSum(item.items)}USD</td>
                 </tr>
               ))}
@@ -76,4 +81,12 @@ const getAllItemsSum = (items: Array<TransactionItem>): number => {
     );
   }, 0);
 };
+
+const setStatusColor = (status: TransactionStatus): Color => {
+  if (status === 'pending') return '#51459F';
+  if (status === 'delivered' || status === 'paid') return '#18DDBD';
+  if (status === 'cancelled' || status === 'payment failed') return '#DE2329';
+  return '#000000';
+};
+
 export default DashboardRecent;
