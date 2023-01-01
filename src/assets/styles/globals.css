@@ -6,8 +6,10 @@
   --primary-color-active: #BA6550;
   --secondary-color: #18DDBD;
   --tertiary-color: #51459F;
+  --danger-color: #DE2329;
   --logo-text-color: #3b4566;
-  --light-text-color: #7A7A7A;
+  --light-text-color: #989aa1;
+  --mid-text-color: #7A7A7A;
   --dark-text-color: #000000;
   --border-color: #F4F4F6;
   --border-radius: 6px;
@@ -30,7 +32,7 @@ body {
   min-height: 100vh;
   height: 100%;
   font-family: var(--main-font);
-  color: var(--light-text-color);
+  color: var(--mid-text-color);
   font-size: 16px;
 }
 
