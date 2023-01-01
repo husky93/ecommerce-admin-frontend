@@ -16,7 +16,7 @@ import type { Item } from '../app/api/types';
 
 interface ItemFormProps {
   mode: 'create' | 'update';
-  data: Item;
+  data?: Item;
 }
 
 const itemSchema = object({
@@ -51,7 +51,18 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
   const { mutate, isLoading } = useFormMutation(apiRequest, 'items');
 
   useEffect(() => {
-    reset(data);
+    if (data) {
+      const { title, description, category, price, margin, num_in_stock } =
+        data;
+      reset({
+        title,
+        description,
+        category: category._id,
+        price,
+        margin,
+        num_in_stock,
+      });
+    }
   }, [data]);
 
   const methods = useForm<ItemInput>({
@@ -130,7 +141,13 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
               id="num_in_stock"
             />
           </div>
-          {isLoading ? <Spinner /> : <button type="submit">Submit</button>}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <button type="submit" className="btn-primary">
+              Submit
+            </button>
+          )}
         </form>
       </FormProvider>
     </div>
