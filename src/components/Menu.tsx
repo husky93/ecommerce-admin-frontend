@@ -11,6 +11,7 @@ import {
 const Menu: React.FC = ({}) => {
   return (
     <nav className={styles.menu}>
+      <h3 className={styles.heading}>Menu</h3>
       <ul>
         <MenuLink to="/dashboard/">
           <FiHome /> Dashboard

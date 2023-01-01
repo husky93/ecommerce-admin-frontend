@@ -1,0 +1,14 @@
+.menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 0.85em;
+  padding: 0;
+  margin: 0;
+}
+
+.heading {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
