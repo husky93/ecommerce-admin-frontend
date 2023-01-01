@@ -15,14 +15,14 @@ const Categories: React.FC = ({}) => {
     <div className={styles.categories}>
       <div className={styles.ui}>
         <CreateButton to="/dashboard/categories/new" />
-        <EditList
-          isLoading={isLoading}
-          isError={isError}
-          data={data}
-          error={error}
-          name="categories"
-        />
       </div>
+      <EditList
+        isLoading={isLoading}
+        isError={isError}
+        data={data}
+        error={error}
+        name="categories"
+      />
     </div>
   );
 };

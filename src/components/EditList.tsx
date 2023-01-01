@@ -3,13 +3,17 @@ import Spinner from './Spinner';
 import styles from '../assets/styles/components/EditList.module.css';
 import { FiEdit } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import type { CategoriesGet } from '../app/api/types';
+import type {
+  CategoriesGet,
+  ItemsGet,
+  TransactionsGet,
+} from '../app/api/types';
 import type { AxiosError } from 'axios';
 
 interface EditListProps {
   isLoading: boolean;
   isError: boolean;
-  data: CategoriesGet | undefined;
+  data: CategoriesGet | ItemsGet | TransactionsGet | undefined;
   error: unknown;
   name: string;
 }
@@ -35,7 +39,7 @@ const EditList: React.FC<EditListProps> = ({
         <div>
           {data.map((elem) => (
             <div key={elem._id}>
-              {elem.title}
+              {'title' in elem ? elem.title : elem._id}
               <Link to={`/dashboard/${name}/${elem._id}`}>
                 <button className={styles.btn}>
                   <FiEdit /> Edit
