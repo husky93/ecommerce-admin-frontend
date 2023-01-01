@@ -48,6 +48,7 @@
   text-align: left;
   padding: 18px;
   border-bottom: 2px var(--border-color) solid;
+  font-size: 0.9rem;
 }
 
 .id a {
@@ -67,6 +68,5 @@
 
 .value {
   color: var(--dark-text-color);
-  font-size: 0.9rem;
   font-weight: 700;
 }
