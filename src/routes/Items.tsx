@@ -10,6 +10,7 @@ const Items: React.FC = ({}) => {
 
   return (
     <div className={styles.items}>
+      <h2 className={styles.heading}>Items</h2>
       <div className={styles.ui}>
         <CreateButton to="/dashboard/items/new" />
       </div>

@@ -13,6 +13,7 @@ const Categories: React.FC = ({}) => {
 
   return (
     <div className={styles.categories}>
+      <h2 className={styles.heading}>Categories</h2>
       <div className={styles.ui}>
         <CreateButton to="/dashboard/categories/new" />
       </div>

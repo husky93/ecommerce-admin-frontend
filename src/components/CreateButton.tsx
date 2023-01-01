@@ -9,8 +9,8 @@ interface CreateButtonProps {
 
 const CreateButton: React.FC<CreateButtonProps> = ({ to }) => {
   return (
-    <Link to={to}>
-      <button className={styles.btn}>
+    <Link to={to} className={styles.link}>
+      <button className="btn-primary btn-icon">
         <FiFolderPlus /> Create New
       </button>
     </Link>

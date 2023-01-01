@@ -1,0 +1,23 @@
+.list {
+  border: 2px var(--border-color) solid;
+  border-radius: var(--border-radius);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  padding: 18px;
+  border-bottom: 2px var(--border-color) solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item a {
+  text-decoration: none;
+}
+
+.item:last-of-type {
+  border-bottom: none;
+}

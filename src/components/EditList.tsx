@@ -36,18 +36,18 @@ const EditList: React.FC<EditListProps> = ({
         </span>
       )}
       {data && (
-        <div>
+        <ul className={styles.list}>
           {data.map((elem) => (
-            <div key={elem._id}>
+            <li key={elem._id} className={styles.item}>
               {'title' in elem ? elem.title : elem._id}
               <Link to={`/dashboard/${name}/${elem._id}`}>
-                <button className={styles.btn}>
+                <button className="btn-primary btn-icon">
                   <FiEdit /> Edit
                 </button>
               </Link>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </>
   );

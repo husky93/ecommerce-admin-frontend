@@ -1,0 +1,9 @@
+.transactions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  color: var(--dark-text-color);
+}

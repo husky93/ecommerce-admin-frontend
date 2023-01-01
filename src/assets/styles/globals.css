@@ -59,6 +59,12 @@ body::before {
   )
 }
 
+.btn-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .btn-primary {
   border: none;
   cursor: pointer;
