@@ -102,7 +102,7 @@ const Transaction: React.FC = ({}) => {
           <h3>Items: </h3>
           <ul className={styles.item_list}>
             {transaction.items.map((element) => (
-              <li className={styles.list_item}>
+              <li key={element.item._id} className={styles.list_item}>
                 <div>Name: {element.item.title}</div>
                 <div>Price: {element.item.price}$</div>
                 <div>Quantity: {element.quantity}</div>

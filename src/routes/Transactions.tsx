@@ -19,7 +19,7 @@ const Transactions: React.FC = ({}) => {
         isError={isError}
         data={data}
         error={error}
-        name="categories"
+        name="transactions"
       />
     </div>
   );
