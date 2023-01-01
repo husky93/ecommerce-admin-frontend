@@ -78,6 +78,8 @@ export interface Transaction {
   user: User;
   items: Array<TransactionItem>;
   status: 'pending' | 'delivered' | 'payment failed' | 'cancelled' | 'paid';
+  createdAt: string;
+  updatedAt: string;
   __v: number;
 }
 
