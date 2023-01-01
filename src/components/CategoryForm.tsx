@@ -65,7 +65,13 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ data, mode }) => {
               id="description"
             />
           </div>
-          {isLoading ? <Spinner /> : <button type="submit">Submit</button>}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <button type="submit" className="btn-primary">
+              Submit
+            </button>
+          )}
         </form>
       </FormProvider>
     </div>
