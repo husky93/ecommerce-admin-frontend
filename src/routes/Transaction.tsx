@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import styles from '../assets/styles/routes/Transaction.module.css';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/loaders/Spinner';
 import Select from 'react-select';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';

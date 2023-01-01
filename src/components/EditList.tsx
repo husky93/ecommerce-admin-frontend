@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from './Spinner';
+import TableLoader from './loaders/TableLoader';
 import styles from '../assets/styles/components/EditList.module.css';
 import { FiEdit } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -27,7 +27,7 @@ const EditList: React.FC<EditListProps> = ({
 }) => {
   return (
     <>
-      {isLoading && <Spinner />}
+      {isLoading && <TableLoader />}
       {isError && (
         <span>
           {(error as AxiosError).response?.status === 404

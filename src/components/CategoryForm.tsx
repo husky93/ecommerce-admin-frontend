@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import FormInput from './FormInput';
-import Spinner from './Spinner';
+import Spinner from './loaders/Spinner';
 import styles from '../assets/styles/components/CategoryForm.module.css';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { object, string, number, TypeOf } from 'zod';

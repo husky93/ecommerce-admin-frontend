@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import Spinner from '../Spinner';
+import CardLoader from '../loaders/CardLoader';
 import Card from '../Card';
 import styles from '../../assets/styles/components/dashboard/DashboardTop.module.css';
 import { useQuery } from 'react-query';
@@ -19,8 +19,10 @@ const DashboardTop: React.FC<DashboardTopProps> = ({ userToken }) => {
   return (
     <>
       {isLoading && (
-        <div className={styles.loading}>
-          <Spinner />
+        <div className={styles.dashboard_top}>
+          <CardLoader />
+          <CardLoader />
+          <CardLoader />
         </div>
       )}
       {isError && (

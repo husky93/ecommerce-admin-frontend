@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../assets/styles/routes/Item.module.css';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/loaders/Spinner';
 import ItemForm from '../components/ItemForm';
 import Modal from '../components/Modal';
 import { useQuery } from 'react-query';

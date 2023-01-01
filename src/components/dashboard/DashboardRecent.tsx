@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../assets/styles/components/dashboard/DashboardRecent.module.css';
-import Spinner from '../Spinner';
+import TableLoader from '../loaders/TableLoader';
 import { useQuery } from 'react-query';
 import { getTransactions } from '../../app/api/api';
 import { format } from 'date-fns';
@@ -22,7 +22,7 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
     <>
       {isLoading && (
         <div className={styles.loading}>
-          <Spinner />
+          <TableLoader rows={5} />
         </div>
       )}
       {isError && (

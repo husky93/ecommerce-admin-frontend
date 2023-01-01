@@ -1,5 +1,5 @@
 import styles from '../assets/styles/routes/Login.module.css';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/loaders/Spinner';
 import FormInput from '../components/FormInput';
 import Logo from '../components/Logo';
 import { useMutation } from 'react-query';
