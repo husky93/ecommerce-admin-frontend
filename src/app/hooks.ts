@@ -24,7 +24,7 @@ export const useFormMutation = (
 
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = useMutation(
+  const { mutate, isLoading, error } = useMutation(
     (data: any) => {
       if (!data) {
         return (apiRequest as DeleteApiRequest)(state.authUser?.token, id);
@@ -43,5 +43,5 @@ export const useFormMutation = (
     }
   );
 
-  return { mutate, isLoading };
+  return { mutate, isLoading, error };
 };
