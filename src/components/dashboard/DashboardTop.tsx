@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import Spinner from './Spinner';
-import Card from './Card';
-import styles from '../assets/styles/components/DashboardTop.module.css';
+import Spinner from '../Spinner';
+import Card from '../Card';
+import styles from '../../assets/styles/components/dashboard/DashboardTop.module.css';
 import { useQuery } from 'react-query';
-import { getTransactions } from '../app/api/api';
-import type { TransactionsGet } from '../app/api/types';
+import { getTransactions } from '../../app/api/api';
+import type { TransactionsGet } from '../../app/api/types';
 import type { AxiosError } from 'axios';
 
 interface DashboardTopProps {
