@@ -17,7 +17,7 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
-  color: var(--light-text-color);
+  color: var(--mid-text-color);
   box-shadow: var(--box-shadow-md);
   border-radius: var(--border-radius);
 }

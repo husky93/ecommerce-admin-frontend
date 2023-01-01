@@ -48,7 +48,7 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
             <tbody className={styles.tbody}>
               {data.map((item) => (
                 <tr key={item._id}>
-                  <td className={styles.td}>
+                  <td className={`${styles.td} ${styles.id}`}>
                     <Link to={`transactions/${item._id}`}>{item._id}</Link>
                   </td>
                   <td className={`${styles.td} ${styles.date}`}>
@@ -87,10 +87,9 @@ const getAllItemsSum = (items: Array<TransactionItem>): number => {
 };
 
 const setStatusColor = (status: TransactionStatus): Color => {
-  if (status === 'pending') return '#51459F';
   if (status === 'delivered' || status === 'paid') return '#18DDBD';
   if (status === 'cancelled' || status === 'payment failed') return '#DE2329';
-  return '#000000';
+  return '#7A7A7A';
 };
 
 export default DashboardRecent;

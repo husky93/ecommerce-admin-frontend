@@ -38,11 +38,11 @@
 }
 
 .label input:invalid {
-  border: 2px red solid;
+  border: 2px var(--danger-color) solid;
 }
 
 .error {
   margin-top: 2px;
   font-size: 0.80rem;
-  color: red;
+  color: var(--danger-color) ;
 }
