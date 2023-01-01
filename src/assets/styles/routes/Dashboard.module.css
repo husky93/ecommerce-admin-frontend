@@ -13,7 +13,7 @@
   border-right: 2px var(--border-color) solid;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 48px;
 }
 
 .content {
