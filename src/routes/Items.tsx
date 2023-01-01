@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from '../assets/styles/routes/Items.module.css';
 import Spinner from '../components/Spinner';
+import CreateButton from '../components/CreateButton';
 import { Link } from 'react-router-dom';
 import { getItems } from '../app/api/api';
 import { useQuery } from 'react-query';
@@ -12,9 +13,7 @@ const Items: React.FC = ({}) => {
   return (
     <div className={styles.items}>
       <div className={styles.ui}>
-        <Link to="/dashboard/items/new">
-          <button className={styles.btn}>Create New</button>
-        </Link>
+        <CreateButton to="/dashboard/items/new" />
       </div>
       {isLoading && <Spinner />}
       {isError && (

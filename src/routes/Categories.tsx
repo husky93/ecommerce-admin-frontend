@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from '../assets/styles/routes/Categories.module.css';
 import Spinner from '../components/Spinner';
+import CreateButton from '../components/CreateButton';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { getCategories } from '../app/api/api';
+import { FiEdit } from 'react-icons/fi';
 import type { AxiosError } from 'axios';
 
 const Categories: React.FC = ({}) => {
@@ -18,9 +20,7 @@ const Categories: React.FC = ({}) => {
   return (
     <div className={styles.categories}>
       <div className={styles.ui}>
-        <Link to="/dashboard/categories/new">
-          <button className={styles.btn}>Create New</button>
-        </Link>
+        <CreateButton to="/dashboard/categories/new" />
       </div>
       {isLoading && <Spinner />}
       {isError && (
@@ -33,9 +33,14 @@ const Categories: React.FC = ({}) => {
       {data && (
         <div>
           {data.map((category) => (
-            <Link to={`/dashboard/categories/${category._id}`}>
+            <div key={category._id}>
               {category.title}
-            </Link>
+              <Link to={`/dashboard/categories/${category._id}`}>
+                <button className={styles.btn}>
+                  <FiEdit /> Edit
+                </button>
+              </Link>
+            </div>
           ))}
         </div>
       )}
