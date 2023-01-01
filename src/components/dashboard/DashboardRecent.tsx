@@ -34,6 +34,10 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
         <div className={styles.dashboard_recent}>
           <div className={styles.recent_top}>
             <h2 className={styles.heading}>Recent Transactions</h2>
+            <Link
+              to="transactions"
+              className={styles.trans_link}
+            >{`See all transactions >`}</Link>
           </div>
           <table className={styles.table}>
             <thead className={styles.thead}>
@@ -64,7 +68,7 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
                     {item.status}
                   </td>
                   <td className={`${styles.td} ${styles.value}`}>
-                    {getAllItemsSum(item.items)}USD
+                    {getAllItemsSum(item.items)} USD
                   </td>
                 </tr>
               ))}
