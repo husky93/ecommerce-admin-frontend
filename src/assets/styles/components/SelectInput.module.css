@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.error {
+  margin: 2px 0 6px 0;
+  font-size: 0.80rem;
+  color: var(--danger-color) ;
+}
+
+.select {
+  font-size: 0.9rem;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: all .150s ease-in-out;
+  border: 2px var(--tertiary-color) solid;
+}

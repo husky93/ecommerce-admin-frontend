@@ -28,12 +28,14 @@ const SelectInput: FC<IFormInputProps> = ({
       control={control}
       name={name}
       render={({ field }) => (
-        <div>
+        <div className={styles.wrapper}>
           <label>{label}</label>
           {error ? (
-            <div>Error! Could not load categories.</div>
+            <div className={styles.error}>
+              Error! Could not load categories.
+            </div>
           ) : (
-            <select {...field} {...otherProps}>
+            <select className={styles.select} {...field} {...otherProps}>
               <option value="">Please choose a category</option>
               {options &&
                 options.map((option) => (
