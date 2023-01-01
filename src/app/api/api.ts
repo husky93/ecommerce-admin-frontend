@@ -125,11 +125,17 @@ export const deleteItem = async (
   }
 };
 
-export const getTransactions = async (token: string | undefined) => {
+export const getTransactions = async (
+  token: string | undefined,
+  recent?: boolean
+) => {
   if (token) {
-    const response = await authApi.get<TransactionsGet>('transactions', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await authApi.get<TransactionsGet>(
+      `transactions${recent ? `?recent="true"` : ''}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   }
 };
