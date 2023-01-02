@@ -43,7 +43,7 @@ const Transaction: React.FC = ({}) => {
           const total = data.items.reduce((prevValue, obj) => {
             return prevValue + obj.item.price_gross * obj.quantity;
           }, 0);
-          setTotalPrice(total);
+          setTotalPrice(Math.round(total * 100) / 100);
           setTransactionStatus(data.status);
         }
       },
