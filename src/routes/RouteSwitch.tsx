@@ -1,6 +1,6 @@
 import React from 'react';
 import ProtectedRoutes from './ProtectedRoutes';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import ErrorPage from './Error';
