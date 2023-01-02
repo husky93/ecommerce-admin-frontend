@@ -25,7 +25,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <QueryClientProvider client={queryClient}>
         <IconContext.Provider value={{ size: '1.25rem' }}>
           <RouteSwitch />
-          <ReactQueryDevtools initialIsOpen={false} />
         </IconContext.Provider>
       </QueryClientProvider>
     </StateContextProvider>

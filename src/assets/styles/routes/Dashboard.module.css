@@ -29,7 +29,7 @@
 }
 
 .content {
-  padding: 24px 48px;
+  padding: 24px 12px;
   width: 100%;
 }
 
@@ -39,6 +39,7 @@
   top: 0;
   left: 0;
   padding: 24px 48px;
+  background-color: transparent;
   border-right: 2px var(--border-color) solid;
   display: flex;
   flex-direction: column;
@@ -48,4 +49,8 @@
   align-items: flex-start;
   justify-content: flex-start;
  }
+
+ .content {
+  padding: 24px 48px;
+}
 }

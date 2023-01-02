@@ -37,7 +37,7 @@ const FormInput: FC<IFormInputProps> = ({
             )}
           </label>
           <div className={styles.error}>
-            {errors[name] && errors[name].message}
+            {errors[name] && (errors[name]!.message as string)}
           </div>
         </div>
       )}

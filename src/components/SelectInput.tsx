@@ -44,7 +44,7 @@ const SelectInput: FC<IFormInputProps> = ({
             </select>
           )}
           <div className={styles.error}>
-            {errors[name] && errors[name].message}
+            {errors[name] && (errors[name]!.message as string)}
           </div>
         </div>
       )}
