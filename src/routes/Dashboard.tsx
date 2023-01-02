@@ -19,7 +19,7 @@ const Dashboard: React.FC<DashboardProps> = ({}) => {
       <Hamburger handleClick={toggleMenu} />
       <aside className={`${styles.aside} ${isMenuActive ? styles.active : ''}`}>
         <Logo text="Shop" sm />
-        <Menu />
+        <Menu toggleMenu={toggleMenu} />
       </aside>
       <div className={styles.content}>
         <NavBar />

@@ -5,12 +5,13 @@ import styles from '../assets/styles/components/MenuLink.module.css';
 interface MenuLinkProps {
   children: React.ReactNode;
   to: string;
+  handleClick: React.MouseEventHandler;
 }
 
-const MenuLink: React.FC<MenuLinkProps> = ({ children, to }) => {
+const MenuLink: React.FC<MenuLinkProps> = ({ children, to, handleClick }) => {
   return (
     <li className={styles.item}>
-      <Link to={to} className={styles.link}>
+      <Link to={to} className={styles.link} onClick={handleClick}>
         {children}
       </Link>
     </li>

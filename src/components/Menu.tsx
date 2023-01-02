@@ -8,21 +8,25 @@ import {
   FiShoppingCart,
 } from 'react-icons/fi';
 
-const Menu: React.FC = ({}) => {
+interface MenuProps {
+  toggleMenu: React.MouseEventHandler;
+}
+
+const Menu: React.FC<MenuProps> = ({ toggleMenu }) => {
   return (
     <nav className={styles.menu}>
       <h3 className={styles.heading}>Menu</h3>
       <ul>
-        <MenuLink to="/dashboard/">
+        <MenuLink to="/dashboard/" handleClick={toggleMenu}>
           <FiHome /> Dashboard
         </MenuLink>
-        <MenuLink to="/dashboard/categories">
+        <MenuLink to="/dashboard/categories" handleClick={toggleMenu}>
           <FiFolder /> Categories
         </MenuLink>
-        <MenuLink to="/dashboard/items">
+        <MenuLink to="/dashboard/items" handleClick={toggleMenu}>
           <FiShoppingBag /> Items
         </MenuLink>
-        <MenuLink to="/dashboard/transactions">
+        <MenuLink to="/dashboard/transactions" handleClick={toggleMenu}>
           <FiShoppingCart /> Transactions
         </MenuLink>
       </ul>
