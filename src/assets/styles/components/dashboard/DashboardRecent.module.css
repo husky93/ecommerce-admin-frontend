@@ -1,12 +1,14 @@
-.dashboard_recent {
-  display: flex;
-  flex-direction: column;
+.container {
+  overflow-x: hidden;
 }
 
 .dashboard_recent {
+  display: flex;
+  flex-direction: column;
   border: 2px var(--border-color) solid;
   border-radius: var(--border-radius);
   border-bottom: none;
+  overflow-x: hidden;
 }
 
 .recent_top {
@@ -31,8 +33,12 @@
 }
 
 .table {
-  border-spacing: 0;
-  overflow-x: auto;
+  overflow-x: hidden;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .th {
@@ -69,4 +75,50 @@
 .value {
   color: var(--dark-text-color);
   font-weight: 700;
+}
+
+@media screen and (max-width: 600px) {
+  .table {
+    border: 0;
+  }
+  
+  .thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  .td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--mid-text-color);
+  }
+  
+  .td:last-child {
+    border-bottom: 0;
+  }
 }

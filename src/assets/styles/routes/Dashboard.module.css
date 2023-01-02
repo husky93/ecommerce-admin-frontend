@@ -5,19 +5,46 @@
   margin: 48px 0;
   min-height: 90vh;
   height: 100%;
-  width: 100%;
   display: flex;
 }
 
 .aside {
-  padding: 24px 48px;
-  border-right: 2px var(--border-color) solid;
+  position: fixed;
+  top: -100%;
+  left: 0;
+  z-index: 100;
+  background-color: var(--app-inner-bg-color);
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  align-items: center;
+  justify-content: center;
+  transition: top 350ms ease-out;
+}
+
+.active {
+  top: 0;
 }
 
 .content {
   padding: 24px 48px;
   width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+ .aside {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 24px 48px;
+  border-right: 2px var(--border-color) solid;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: initial;
+  height: initial;
+  align-items: flex-start;
+  justify-content: flex-start;
+ }
 }
