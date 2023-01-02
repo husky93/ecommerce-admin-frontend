@@ -3,6 +3,7 @@
   background-color: var(--app-inner-bg-color);
   border-radius: 16px;
   margin: 48px 0;
+  min-height: 90vh;
   height: 100%;
   width: 100%;
   display: flex;
