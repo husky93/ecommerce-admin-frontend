@@ -69,8 +69,21 @@
   border-bottom: none;
 }
 
-.total {
+.total_table {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--dark-text-color);
+}
+
+.total {
+  margin: 24px 0 ;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark-text-color);
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

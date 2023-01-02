@@ -110,7 +110,7 @@ const Transaction: React.FC = ({}) => {
                     {Math.round(element.item.price_gross * 100) / 100}USD
                   </td>
                   <td className={styles.td}>{element.quantity}</td>
-                  <td className={`${styles.td} ${styles.total}`}>
+                  <td className={`${styles.td} ${styles.total_table}`}>
                     {Math.round(
                       element.quantity * element.item.price_gross * 100
                     ) / 100}
@@ -121,7 +121,7 @@ const Transaction: React.FC = ({}) => {
             </tbody>
           </table>
           <div className={styles.total}>
-            Total Transaction Price: <span>{totalPrice}$</span>
+            Total Transaction Value: <span>{totalPrice}$</span>
           </div>
           <div className={styles.status}>
             Change Transaction Status:
