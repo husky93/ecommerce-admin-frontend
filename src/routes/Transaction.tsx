@@ -53,14 +53,6 @@ const Transaction: React.FC = ({}) => {
   const onSelectChange: (newValue: any, actionMeta: ActionMeta<any>) => void = (
     newValue
   ) => {
-    console.log({
-      ...transaction,
-      status: newValue.value,
-      user: transaction?.user._id,
-      items: transaction?.items.map((element) => {
-        return { item: element.item._id, quantity: element.quantity };
-      }),
-    });
     mutate({
       ...transaction,
       status: newValue.value,
@@ -76,7 +68,7 @@ const Transaction: React.FC = ({}) => {
       {isLoading && <Spinner />}
       {isError && <span>Error: {(error as any).message}</span>}
       {transaction && (
-        <div>
+        <div className={styles.wrapper}>
           <h3>Client Info: </h3>
           <div className={styles.user_info}>
             <div>
@@ -100,21 +92,38 @@ const Transaction: React.FC = ({}) => {
             </div>
           </div>
           <h3>Items: </h3>
-          <ul className={styles.item_list}>
-            {transaction.items.map((element) => (
-              <li key={element.item._id} className={styles.list_item}>
-                <div>Name: {element.item.title}</div>
-                <div>Price: {element.item.price}$</div>
-                <div>Quantity: {element.quantity}</div>
-                <div>Sum: {element.quantity * element.item.price}$</div>
-              </li>
-            ))}
-          </ul>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th className={styles.th}>Name</th>
+                <th className={styles.th}>Price</th>
+                <th className={styles.th}>Quantity</th>
+                <th className={styles.th}>Total Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transaction.items.map((element) => (
+                <tr key={element.item._id} className={styles.tr}>
+                  <td>{element.item.title}</td>
+                  <td>{Math.round(element.item.price_gross * 100) / 100}USD</td>
+                  <td>{element.quantity}</td>
+                  <td>
+                    {Math.round(
+                      element.quantity * element.item.price_gross * 100
+                    ) / 100}
+                    USD
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <div className={styles.total}>
             Total Transaction Price: <span>{totalPrice}$</span>
           </div>
           <div className={styles.status}>
+            Change Transaction Status:
             <Select
+              className={styles.select}
               onChange={onSelectChange}
               options={selectOptions}
               defaultValue={selectOptions.find(

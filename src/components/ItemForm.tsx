@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import FormInput from './FormInput';
 import SelectInput from './SelectInput';
 import Spinner from './loaders/Spinner';
+import Select from 'react-select';
 import styles from '../assets/styles/components/ItemForm.module.css';
 import { object, string, number, TypeOf, coerce } from 'zod';
 import { useQuery } from 'react-query';
