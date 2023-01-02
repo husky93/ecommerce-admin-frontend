@@ -104,10 +104,12 @@ const Transaction: React.FC = ({}) => {
             <tbody>
               {transaction.items.map((element) => (
                 <tr key={element.item._id} className={styles.tr}>
-                  <td>{element.item.title}</td>
-                  <td>{Math.round(element.item.price_gross * 100) / 100}USD</td>
-                  <td>{element.quantity}</td>
-                  <td>
+                  <td className={styles.td}>{element.item.title}</td>
+                  <td className={styles.td}>
+                    {Math.round(element.item.price_gross * 100) / 100}USD
+                  </td>
+                  <td className={styles.td}>{element.quantity}</td>
+                  <td className={`${styles.td} ${styles.total}`}>
                     {Math.round(
                       element.quantity * element.item.price_gross * 100
                     ) / 100}
