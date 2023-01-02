@@ -46,7 +46,11 @@ const Item: React.FC<ItemProps> = ({ mode }) => {
 
   return (
     <div className={styles.category}>
-      {(isLoading || isDeleting) && <Spinner />}
+      {(isLoading || isDeleting) && (
+        <div className={styles.loading}>
+          <Spinner />
+        </div>
+      )}
       {isError && <span>Error: {(error as any).message}</span>}
       {deleteError && (
         <span className={styles.error}>

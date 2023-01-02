@@ -8,6 +8,14 @@
   gap: 12px;
 }
 
+.loading {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .modal_ui {
   display: flex;
   gap: 12px;

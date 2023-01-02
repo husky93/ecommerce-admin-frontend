@@ -65,7 +65,11 @@ const Transaction: React.FC = ({}) => {
 
   return (
     <div className={styles.transaction}>
-      {isLoading && <Spinner />}
+      {isLoading && (
+        <div className={styles.loading}>
+          <Spinner />
+        </div>
+      )}
       {isError && <span>Error: {(error as any).message}</span>}
       {transaction && (
         <div className={styles.wrapper}>

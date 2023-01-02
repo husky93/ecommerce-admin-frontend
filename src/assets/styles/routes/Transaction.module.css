@@ -4,6 +4,14 @@
   gap: 8px;
 }
 
+.loading {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .heading, .wrapper h3 {
   color: var(--dark-text-color);
 }

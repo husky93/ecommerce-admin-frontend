@@ -52,7 +52,11 @@ const Category: React.FC<CategoryProps> = ({ mode }) => {
   return (
     <div className={styles.category}>
       <ToastContainer />
-      {(query.isLoading || isDeleting) && <Spinner />}
+      {(query.isLoading || isDeleting) && (
+        <div className={styles.loading}>
+          <Spinner />
+        </div>
+      )}
       {query.isError && (
         <span className={styles.error}>
           Error: {(query.error as AxiosError).message}
