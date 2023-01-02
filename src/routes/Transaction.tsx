@@ -41,7 +41,7 @@ const Transaction: React.FC = ({}) => {
       onSuccess(data) {
         if (data) {
           const total = data.items.reduce((prevValue, obj) => {
-            return prevValue + obj.item.price * obj.quantity;
+            return prevValue + obj.item.price_gross * obj.quantity;
           }, 0);
           setTotalPrice(total);
           setTransactionStatus(data.status);
