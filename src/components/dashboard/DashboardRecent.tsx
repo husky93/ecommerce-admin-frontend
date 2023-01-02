@@ -19,7 +19,7 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
   );
 
   return (
-    <>
+    <div className={styles.container}>
       {isLoading && (
         <div className={styles.loading}>
           <TableLoader rows={5} />
@@ -39,44 +39,68 @@ const DashboardRecent: React.FC<DashboardRecentProps> = ({ userToken }) => {
               className={styles.trans_link}
             >{`See all transactions >`}</Link>
           </div>
-          <table className={styles.table}>
-            <thead className={styles.thead}>
-              <tr>
-                <th className={styles.th}>ID</th>
-                <th className={styles.th}>Date Created</th>
-                <th className={styles.th}>Ordered By</th>
-                <th className={styles.th}>Status</th>
-                <th className={styles.th}>Value</th>
-              </tr>
-            </thead>
-            <tbody className={styles.tbody}>
-              {data.map((item) => (
-                <tr key={item._id}>
-                  <td className={`${styles.td} ${styles.id}`}>
-                    <Link to={`transactions/${item._id}`}>{item._id}</Link>
-                  </td>
-                  <td className={`${styles.td} ${styles.date}`}>
-                    {format(new Date(item.createdAt), 'HH:mm, do MMM yyyy')}
-                  </td>
-                  <td
-                    className={styles.td}
-                  >{`${item.user.name} ${item.user.surname}`}</td>
-                  <td
-                    className={`${styles.td} ${styles.status}`}
-                    style={{ color: setStatusColor(item.status) }}
-                  >
-                    {item.status}
-                  </td>
-                  <td className={`${styles.td} ${styles.value}`}>
-                    {getAllItemsSum(item.items)} USD
-                  </td>
+          <div className={styles.table_wrapper}>
+            <table className={styles.table}>
+              <thead className={styles.thead}>
+                <tr className={styles.tr}>
+                  <th scope="col" className={styles.th}>
+                    ID
+                  </th>
+                  <th scope="col" className={styles.th}>
+                    Date Created
+                  </th>
+                  <th scope="col" className={styles.th}>
+                    Ordered By
+                  </th>
+                  <th scope="col" className={styles.th}>
+                    Status
+                  </th>
+                  <th scope="col" className={styles.th}>
+                    Value
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className={styles.tbody}>
+                {data.map((item) => (
+                  <tr key={item._id} className={styles.tr}>
+                    <td
+                      className={`${styles.td} ${styles.id}`}
+                      scope="row"
+                      data-label="ID"
+                    >
+                      <Link to={`transactions/${item._id}`}>{item._id}</Link>
+                    </td>
+                    <td
+                      className={`${styles.td} ${styles.date}`}
+                      data-label="Date Created"
+                    >
+                      {format(new Date(item.createdAt), 'HH:mm, do MMM yyyy')}
+                    </td>
+                    <td
+                      className={styles.td}
+                      data-label="Ordered By"
+                    >{`${item.user.name} ${item.user.surname}`}</td>
+                    <td
+                      className={`${styles.td} ${styles.status}`}
+                      style={{ color: setStatusColor(item.status) }}
+                      data-label="Status"
+                    >
+                      {item.status}
+                    </td>
+                    <td
+                      className={`${styles.td} ${styles.value}`}
+                      data-label="Value"
+                    >
+                      {getAllItemsSum(item.items)} USD
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
