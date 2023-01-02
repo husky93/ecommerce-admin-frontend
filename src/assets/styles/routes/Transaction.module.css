@@ -4,8 +4,43 @@
   gap: 8px;
 }
 
+.heading, .wrapper h3 {
+  color: var(--dark-text-color);
+}
+
 .list_item {
   display: flex;
+}
+
+.user_info {
+  display: flex;
+  gap: 48px;
+  color: var(--light-text-color);
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name span {
+  color: var(--mid-text-color);
+  font-size: 1.05rem;
+}
+
+.address span {
+  color: var(--mid-text-color);
+  font-size: 1.05rem;
+}
+
+.address_item {
+  display: flex;
+  gap: 8px;
+}
+
+.address_item:first-of-type {
+  margin-top: 8px;
 }
 
 .table {

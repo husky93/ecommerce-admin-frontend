@@ -69,24 +69,25 @@ const Transaction: React.FC = ({}) => {
       {isError && <span>Error: {(error as any).message}</span>}
       {transaction && (
         <div className={styles.wrapper}>
+          <h2 className={styles.heading}>Transaction {transaction._id}</h2>
           <h3>Client Info: </h3>
           <div className={styles.user_info}>
-            <div>
+            <div className={styles.name}>
               Client name:{' '}
               <span>{`${transaction.user.name} ${transaction.user.surname}`}</span>
             </div>
-            <div>
+            <div className={styles.address}>
               Address:
-              <div>
+              <div className={styles.address_item}>
                 City: <span>{transaction.user.address.city}</span>
               </div>
-              <div>
+              <div className={styles.address_item}>
                 Zip Code: <span>{transaction.user.address.zip_code}</span>
               </div>
-              <div>
+              <div className={styles.address_item}>
                 Street: <span>{transaction.user.address.street}</span>
               </div>
-              <div>
+              <div className={styles.address_item}>
                 House Number: <span>{transaction.user.address.house_num}</span>
               </div>
             </div>
