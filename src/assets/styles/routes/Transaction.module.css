@@ -52,9 +52,12 @@
 }
 
 .table {
-  border-spacing: 0;
-  overflow-x: auto;
-  border: 2px var(--border-color) solid;
+  overflow-x: hidden;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .th {
@@ -69,14 +72,34 @@
 .td {
   text-align: left;
   padding: 18px;
-  font-size: 0.9rem;
   border-bottom: 2px var(--border-color) solid;
+  font-size: 0.9rem;
 }
 
-.tr:last-of-type .td{
-  border-bottom: none;
+.id {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.id a {
+  font-weight: 600;
+  color: var(--light-text-color);
+}
+
+.date {
+  color: var(--light-text-color);
+  font-weight: 300;
+}
+
+.status {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.value {
+  color: var(--dark-text-color);
+  font-weight: 700;
+}
 .total_table {
   font-size: 0.9rem;
   font-weight: 700;
@@ -95,3 +118,51 @@
   flex-direction: column;
   gap: 8px;
 }
+
+
+@media screen and (max-width: 600px) {
+  .table {
+    border: 0;
+  }
+  
+  .thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  .td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--mid-text-color);
+  }
+  
+  .td:last-child {
+    border-bottom: 0;
+  }
+}
+

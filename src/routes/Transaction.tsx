@@ -98,23 +98,42 @@ const Transaction: React.FC = ({}) => {
           </div>
           <h3>Items: </h3>
           <table className={styles.table}>
-            <thead>
-              <tr>
-                <th className={styles.th}>Name</th>
-                <th className={styles.th}>Price</th>
-                <th className={styles.th}>Quantity</th>
-                <th className={styles.th}>Total Cost</th>
+            <thead className={styles.thead}>
+              <tr className={styles.tr}>
+                <th scope="col" className={styles.th}>
+                  Name
+                </th>
+                <th scope="col" className={styles.th}>
+                  Price
+                </th>
+                <th scope="col" className={styles.th}>
+                  Quantity
+                </th>
+                <th scope="col" className={styles.th}>
+                  Total Cost
+                </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={styles.tbody}>
               {transaction.items.map((element) => (
                 <tr key={element.item._id} className={styles.tr}>
-                  <td className={styles.td}>{element.item.title}</td>
-                  <td className={styles.td}>
+                  <td
+                    scope="row"
+                    data-label="Name"
+                    className={`${styles.td} ${styles.name}`}
+                  >
+                    {element.item.title}
+                  </td>
+                  <td data-label="Price" className={styles.td}>
                     {Math.round(element.item.price_gross * 100) / 100}USD
                   </td>
-                  <td className={styles.td}>{element.quantity}</td>
-                  <td className={`${styles.td} ${styles.total_table}`}>
+                  <td data-label="Quantity" className={styles.td}>
+                    {element.quantity}
+                  </td>
+                  <td
+                    data-label="Total Cost"
+                    className={`${styles.td} ${styles.total_table}`}
+                  >
                     {Math.round(
                       element.quantity * element.item.price_gross * 100
                     ) / 100}
