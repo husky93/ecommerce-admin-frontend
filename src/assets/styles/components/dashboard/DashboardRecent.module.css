@@ -57,6 +57,11 @@
   font-size: 0.9rem;
 }
 
+.id {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .id a {
   font-weight: 600;
   color: var(--light-text-color);
