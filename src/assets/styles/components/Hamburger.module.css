@@ -1,10 +1,11 @@
 .hamburger {
   position: fixed;
-  right: 25px;
+  right: 12px;
   top: 25px;
   z-index: 150;
   background-color: rgba(255,255,255, 0.7);
   color: var(--primary-color);
+  box-shadow: var(--box-shadow-md);
   border: none;
 }
 
