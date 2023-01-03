@@ -66,6 +66,7 @@ body::before {
   padding: 12px 24px;
   border-radius: 6px;
   background-color: var(--primary-color);
+  color: var(--app-inner-bg-color);
   font-size: 0.85rem;
   font-weight: 600;
   transition: all .150s ease-in-out;
@@ -77,6 +78,7 @@ body::before {
   padding: 12px 24px;
   border-radius: 6px;
   background-color: var(--danger-color);
+  color: var(--app-inner-bg-color);
   font-size: 0.85rem;
   font-weight: 600;
   transition: all .150s ease-in-out;

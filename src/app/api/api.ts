@@ -12,8 +12,9 @@ import type {
   TransactionsGet,
   User,
 } from './types';
-const BASE_URL = 'https://express-shop-api-production.up.railway.app/';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
+console.log(BASE_URL);
 const authApi = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
