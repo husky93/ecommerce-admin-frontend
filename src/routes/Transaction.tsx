@@ -74,6 +74,17 @@ const Transaction: React.FC = ({}) => {
       {transaction && (
         <div className={styles.wrapper}>
           <h2 className={styles.heading}>Transaction {transaction._id}</h2>
+          <div className={styles.status}>
+            Change Transaction Status:
+            <Select
+              className={styles.select}
+              onChange={onSelectChange}
+              options={selectOptions}
+              defaultValue={selectOptions.find(
+                (item) => item.value === transaction.status
+              )}
+            />
+          </div>
           <h3>Client Info: </h3>
           <div className={styles.user_info}>
             <div className={styles.name}>
@@ -145,17 +156,6 @@ const Transaction: React.FC = ({}) => {
           </table>
           <div className={styles.total}>
             Total Transaction Value: <span>{totalPrice}$</span>
-          </div>
-          <div className={styles.status}>
-            Change Transaction Status:
-            <Select
-              className={styles.select}
-              onChange={onSelectChange}
-              options={selectOptions}
-              defaultValue={selectOptions.find(
-                (item) => item.value === transaction.status
-              )}
-            />
           </div>
         </div>
       )}
