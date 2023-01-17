@@ -16,7 +16,6 @@ const BASE_URL = import.meta.env.DEV
   ? import.meta.env.VITE_DEV_API_URL
   : import.meta.env.VITE_PROD_API_URL;
 
-console.log(BASE_URL);
 const authApi = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
@@ -96,8 +95,16 @@ export const getItem = async (id: string | undefined) => {
 
 export const postItem = async (token: string | undefined, item: ItemInput) => {
   if (token) {
-    const response = await authApi.post<Item>('items', item, {
-      headers: { Authorization: `Bearer ${token}` },
+    const bodyFormData = new FormData();
+    for (const [key, value] of Object.entries(item)) {
+      if (key === 'cover_img') bodyFormData.append(key, value[0]);
+      else bodyFormData.append(key, value);
+    }
+    const response = await authApi.post<Item>('items', bodyFormData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return response.data;
   }
