@@ -39,7 +39,9 @@ const SelectInput: FC<IFormInputProps> = ({
               <option value="">Please choose a category</option>
               {options &&
                 options.map((option) => (
-                  <option value={option._id}>{option.title}</option>
+                  <option value={option._id} key={option._id}>
+                    {option.title}
+                  </option>
                 ))}
             </select>
           )}
