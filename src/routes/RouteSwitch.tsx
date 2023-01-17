@@ -19,7 +19,6 @@ const RouteSwitch: React.FC<RouteSwitchProps> = ({}) => {
   const { state } = useStateContext();
   const { authUser } = state;
 
-  console.log(state);
   return (
     <Router>
       <Routes>
