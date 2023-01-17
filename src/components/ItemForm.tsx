@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import FormInput from './FormInput';
 import SelectInput from './SelectInput';
+import FileInput from './FileInput';
 import Spinner from './loaders/Spinner';
-import Select from 'react-select';
 import styles from '../assets/styles/components/ItemForm.module.css';
-import { object, string, number, TypeOf, coerce } from 'zod';
+import { object, string, TypeOf, coerce, any } from 'zod';
 import { useQuery } from 'react-query';
 import { getCategories, postItem, putItem } from '../app/api/api';
 import { ToastContainer } from 'react-toastify';
@@ -14,6 +14,14 @@ import { useFormMutation } from '../app/hooks';
 
 import type { SubmitHandler } from 'react-hook-form';
 import type { Item } from '../app/api/types';
+
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+];
+const MAX_FILE_SIZE = 200000;
 
 interface ItemFormProps {
   mode: 'create' | 'update';
@@ -36,6 +44,16 @@ const itemSchema = object({
     .number()
     .min(1, 'Number is required')
     .int('Number in Stock must be Integer'),
+  cover_img: any()
+    .refine((files) => files?.length == 1, 'Image is required.')
+    .refine(
+      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
+      `Max file size is 2MB.`
+    )
+    .refine(
+      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+      '.jpg, .jpeg, .png and .webp files are accepted.'
+    ),
 });
 
 export type ItemInput = TypeOf<typeof itemSchema>;
@@ -72,13 +90,14 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
       title: '',
       description: '',
       category: '',
+      cover_img: undefined,
       price: 0,
       margin: 1,
       num_in_stock: 1,
     },
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, register } = methods;
 
   const onSubmitHandler: SubmitHandler<ItemInput> = (values) => {
     mutate(values);
@@ -140,6 +159,15 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
               placeholder="100"
               type="number"
               id="num_in_stock"
+            />
+          </div>
+          <div className="input_group">
+            <FileInput
+              name="cover_img"
+              register={register}
+              label="Upload image:"
+              accept="image/jpg, image/png, image/webp"
+              id="cover_img"
             />
           </div>
           {isLoading ? (
