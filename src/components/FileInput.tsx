@@ -34,7 +34,7 @@ const FileInput: FC<IFileInputProps> = ({
     <div className={styles.group}>
       <label
         className={styles.label}
-        style={{ display: img ? 'none' : 'block' }}
+        style={{ display: img ? 'none' : 'flex' }}
       >
         {label}
         <input type="file" {...register(name)} {...otherProps} />
