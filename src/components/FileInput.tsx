@@ -6,6 +6,7 @@ import type { UseFormRegister } from 'react-hook-form';
 type IFileInputProps = {
   label: string;
   name: 'cover_img';
+  img: string;
   register: UseFormRegister<{
     cover_img?: any;
     title: string;
@@ -20,6 +21,7 @@ type IFileInputProps = {
 
 const FileInput: FC<IFileInputProps> = ({
   label,
+  img,
   name,
   register,
   ...otherProps
@@ -30,7 +32,10 @@ const FileInput: FC<IFileInputProps> = ({
 
   return (
     <div className={styles.group}>
-      <label className={styles.label}>
+      <label
+        className={styles.label}
+        style={{ display: img ? 'none' : 'block' }}
+      >
         {label}
         <input type="file" {...register(name)} {...otherProps} />
       </label>
