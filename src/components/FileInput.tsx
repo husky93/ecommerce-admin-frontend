@@ -37,7 +37,12 @@ const FileInput: FC<IFileInputProps> = ({
         style={{ display: img ? 'none' : 'flex' }}
       >
         {label}
-        <input type="file" {...register(name)} {...otherProps} />
+        <input
+          type="file"
+          {...register(name)}
+          {...otherProps}
+          disabled={!!img}
+        />
       </label>
       <div className={styles.error}>
         {errors[name] && (errors[name]!.message as string)}
