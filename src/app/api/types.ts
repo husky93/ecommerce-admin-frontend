@@ -67,7 +67,7 @@ export interface ItemInput {
   category: string;
   price: number;
   num_in_stock: number;
-  cover_img: File;
+  cover_img: FileList | string;
 }
 
 export interface TransactionItem {

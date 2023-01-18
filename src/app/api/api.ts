@@ -116,7 +116,7 @@ export const putItem = async (
   updatedItem: ItemInput
 ) => {
   if (id && token) {
-    if (Array.isArray(updatedItem.cover_img)) {
+    if (updatedItem.cover_img instanceof FileList) {
       const bodyFormData = new FormData();
       for (const [key, value] of Object.entries(updatedItem)) {
         if (key === 'cover_img') bodyFormData.append(key, value[0]);
