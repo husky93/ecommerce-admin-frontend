@@ -57,6 +57,7 @@ export interface Item {
   price_gross: number;
   margin: number;
   num_in_stock: number;
+  cover_img: string;
   __v: number;
 }
 
@@ -66,6 +67,7 @@ export interface ItemInput {
   category: string;
   price: number;
   num_in_stock: number;
+  cover_img: FileList | string;
 }
 
 export interface TransactionItem {

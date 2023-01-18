@@ -25,7 +25,7 @@
   display: flex;
   gap: 86px;
   color: var(--light-text-color);
-  padding-bottom: 24px;
+  padding-bottom: 16px;
   border-bottom: 2px var(--border-color) solid;
 }
 

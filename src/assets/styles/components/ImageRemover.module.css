@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: fit-content;
+}
+
+.img_container {
+  position: relative;
+}
+
+.img {
+  max-width: 400px;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.remove_btn {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: 600;
+  color: red;
+  background-color: transparent;
+  border: none;
+}
