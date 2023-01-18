@@ -44,6 +44,24 @@ const itemSchema = object({
     .number()
     .min(1, 'Number is required')
     .int('Number in Stock must be Integer'),
+});
+
+const itemSchemaImage = object({
+  title: string()
+    .min(1, 'Title is required')
+    .max(150, 'Title must have maximum 150 characters'),
+  description: string().min(1, 'Description is required'),
+  category: string().min(1, 'Category is required'),
+  price: coerce.number().positive('Price must be positive number'),
+  margin: coerce
+    .number()
+    .int('Margin must be Integer')
+    .min(1, 'Margin must be minimum 1%')
+    .max(100, 'Margin must be maximum 100%'),
+  num_in_stock: coerce
+    .number()
+    .min(1, 'Number is required')
+    .int('Number in Stock must be Integer'),
   cover_img: any()
     .refine((files) => files?.length == 1, 'Image is required.')
     .refine(
@@ -56,7 +74,7 @@ const itemSchema = object({
     ),
 });
 
-export type ItemInput = TypeOf<typeof itemSchema>;
+export type ItemInput = TypeOf<typeof itemSchemaImage | typeof itemSchema>;
 
 const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
   const [img, setImg] = useState('');
@@ -72,8 +90,15 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
 
   useEffect(() => {
     if (data) {
-      const { title, description, category, price, margin, num_in_stock } =
-        data;
+      const {
+        title,
+        description,
+        category,
+        price,
+        margin,
+        num_in_stock,
+        cover_img,
+      } = data;
       reset({
         title,
         description,
@@ -81,13 +106,14 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
         price,
         margin,
         num_in_stock,
+        cover_img,
       });
       setImg(data.cover_img);
     }
   }, [data]);
 
   const methods = useForm<ItemInput>({
-    resolver: zodResolver(itemSchema),
+    resolver: zodResolver(img ? itemSchema : itemSchemaImage),
     defaultValues: {
       title: '',
       description: '',
@@ -163,17 +189,16 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
               id="num_in_stock"
             />
           </div>
-          {!img && (
-            <div className="input_group">
-              <FileInput
-                name="cover_img"
-                register={register}
-                label="Upload image:"
-                accept="image/jpg, image/png, image/webp"
-                id="cover_img"
-              />
-            </div>
-          )}
+          <div className="input_group">
+            <FileInput
+              name="cover_img"
+              img={img}
+              register={register}
+              label="Upload image:"
+              accept="image/jpg, image/png, image/webp"
+              id="cover_img"
+            />
+          </div>
           {isLoading ? (
             <Spinner />
           ) : (
