@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormInput from './FormInput';
 import SelectInput from './SelectInput';
 import FileInput from './FileInput';
@@ -59,6 +59,7 @@ const itemSchema = object({
 export type ItemInput = TypeOf<typeof itemSchema>;
 
 const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
+  const [img, setImg] = useState('');
   const {
     isError: isCategoriesError,
     isLoading: isCategoriesLoading,
@@ -81,6 +82,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
         margin,
         num_in_stock,
       });
+      setImg(data.cover_img);
     }
   }, [data]);
 
@@ -161,15 +163,17 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
               id="num_in_stock"
             />
           </div>
-          <div className="input_group">
-            <FileInput
-              name="cover_img"
-              register={register}
-              label="Upload image:"
-              accept="image/jpg, image/png, image/webp"
-              id="cover_img"
-            />
-          </div>
+          {!img && (
+            <div className="input_group">
+              <FileInput
+                name="cover_img"
+                register={register}
+                label="Upload image:"
+                accept="image/jpg, image/png, image/webp"
+                id="cover_img"
+              />
+            </div>
+          )}
           {isLoading ? (
             <Spinner />
           ) : (
