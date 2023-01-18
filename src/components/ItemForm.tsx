@@ -22,7 +22,7 @@ const ACCEPTED_IMAGE_TYPES = [
   'image/png',
   'image/webp',
 ];
-const MAX_FILE_SIZE = 200000;
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
 
 interface ItemFormProps {
   mode: 'create' | 'update';
