@@ -116,18 +116,27 @@ export const putItem = async (
   updatedItem: ItemInput
 ) => {
   if (id && token) {
-    const bodyFormData = new FormData();
-    for (const [key, value] of Object.entries(updatedItem)) {
-      if (key === 'cover_img') bodyFormData.append(key, value[0]);
-      else bodyFormData.append(key, value);
+    if (Array.isArray(updatedItem.cover_img)) {
+      const bodyFormData = new FormData();
+      for (const [key, value] of Object.entries(updatedItem)) {
+        if (key === 'cover_img') bodyFormData.append(key, value[0]);
+        else bodyFormData.append(key, value);
+      }
+      const response = await authApi.put<Item>(`items/${id}`, bodyFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    } else {
+      const response = await authApi.put<Item>(`items/${id}`, updatedItem, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
     }
-    const response = await authApi.put<Item>(`items/${id}`, bodyFormData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
   }
 };
 
@@ -195,13 +204,6 @@ export const getUser = async (
     const response = await authApi.get<User>(`transactions/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.data;
-  }
-};
-
-export const getImage = async (imageName: string) => {
-  if (imageName) {
-    const response = await authApi.get(`images/${imageName}`);
     return response.data;
   }
 };
