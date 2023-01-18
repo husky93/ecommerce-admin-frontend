@@ -3,6 +3,7 @@ import FormInput from './FormInput';
 import SelectInput from './SelectInput';
 import FileInput from './FileInput';
 import Spinner from './loaders/Spinner';
+import ImageRemover from './ImageRemover';
 import styles from '../assets/styles/components/ItemForm.module.css';
 import { object, string, TypeOf, coerce, any } from 'zod';
 import { useQuery } from 'react-query';
@@ -190,6 +191,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ mode, data }) => {
             />
           </div>
           <div className="input_group">
+            {img && <ImageRemover img={img} removeHandler={setImg} />}
             <FileInput
               name="cover_img"
               img={img}
