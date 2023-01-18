@@ -190,3 +190,10 @@ export const getUser = async (
     return response.data;
   }
 };
+
+export const getImage = async (imageName: string) => {
+  if (imageName) {
+    const response = await authApi.get(`images/${imageName}`);
+    return response.data;
+  }
+};
